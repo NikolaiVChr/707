@@ -160,7 +160,34 @@ if you contacted me before making any changes to this software.
 		<name>radioRoom</name>
 		<path>Aircraft/707/Models/Cockpit/Awacs/radioroom.xml</path>
 	</model>
+
+	<model>
+		<name>radioRoomE3</name>
+		<path>Aircraft/707/Models/Cockpit/Awacs/radioroomE3.xml</path>
+	</model>
 	
+	<animation>
+    <type>select</type>
+    <object-name>radioRoomE3</object-name>
+    <condition>
+      <equals>
+        <property>sim/aircraft</property>
+        <value>E-3</value>
+      </equals>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>radioRoom</object-name>
+    <condition>
+      <not>
+      <equals>
+        <property>sim/aircraft</property>
+        <value>E-3</value>
+      </equals>
+    </not>
+    </condition>
+  </animation>
 		
 	<!-- inside fuselage -->
 	<animation>

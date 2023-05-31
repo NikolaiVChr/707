@@ -235,6 +235,15 @@ var AirborneRadar = {
 			return [me.eulerX/me.fieldOfRegardMaxAz,me.eulerY/me.fieldOfRegardMaxElev];
 		}
 	},
+	getCaretLinePosition: func {
+		if (me["eulerX"] == nil or me["eulerY"] == nil) {
+			return [0,0];
+		} elsif (me.horizonStabilized) {
+			return [me.eulerX,me.eulerY];
+		} else {
+			return [me.eulerX/me.fieldOfRegardMaxAz,me.eulerY/me.fieldOfRegardMaxElev];
+		}
+	},
 	setAntennae: func (local_dir) {
 		# remember to set horizonStabilized when calling this.
 
@@ -1093,7 +1102,7 @@ var APG68 = {
 	#
 	# Root modes is  0: CRM  1: ACM 2: SEA 3: GM 4: GMT
 	#
-	instantFoVradius: 3.90*0.5,#average of horiz/vert radius
+	instantFoVradius: 15,#average of horiz/vert radius
 	instantVertFoVradius: 4.55*0.5,# real vert radius (used by ground mapper)
 	instantHoriFoVradius: 3.25*0.5,# real hori radius (not used)
 	rcsRefDistance: 350,
