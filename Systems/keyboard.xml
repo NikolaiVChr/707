@@ -170,5 +170,14 @@ if you contacted me before making any changes to this software.
                 <property>/instrumentation/rwr/auto-cm</property>
             </binding>
         </key>
+        <key n="102">
+            <name>f</name>
+            <desc>IFF</desc>
+            <binding>
+                <command>property-assign</command>
+                <property>instrumentation/radar/iff</property>
+                <value>1</value>
+            </binding>
+        </key>
 
 </PropertyList>

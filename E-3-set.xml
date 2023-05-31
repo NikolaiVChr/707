@@ -191,6 +191,10 @@ if you contacted me before making any changes to this software.
 		  <name>Shift-q</name>
 		  <desc>Reset view</desc>
 		</key>
+		<key>
+		  <name>f</name>
+		  <desc>IFF interogate</desc>
+		</key>
 		<text>
 _______________ Boeing 707 Airborne Warning Control System  ___________________
 
