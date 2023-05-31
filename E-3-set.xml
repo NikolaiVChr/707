@@ -24,13 +24,17 @@ if you contacted me before making any changes to this software.
 ########################################################################-->
 <PropertyList include="707-common.xml">
  <sim n="0">
-  <description>Boeing EC-137D</description>
+  <description>Boeing E-3 Sentry</description>
+  <long-description>
+   An AWACS system based on the chassis of a 707.
+  </long-description>
 	<startup>
-		<splash-texture>Aircraft/707/splashEC.png</splash-texture>
+		<!--splash-texture>Aircraft/707/splashEC.png</splash-texture-->
 	</startup>
 	
-	<variant-of>E-3</variant-of>
-	
+	<!--variant-of>707</variant-of-->
+	<aero>E-3</aero>
+
   <model n="0">
    	 <path>Aircraft/707/Models/EC-137D.xml</path>
       <livery>
@@ -41,7 +45,7 @@ if you contacted me before making any changes to this software.
 	<menubar>
 		<default>
 			<menu n="100">
-				<label>Boeing EC-137D</label>
+				<label>Boeing E3 Sentry</label>
 				<enabled type="bool">true</enabled>
 				<item>
 					<label>Autostart / shutdown</label>
@@ -122,7 +126,7 @@ if you contacted me before making any changes to this software.
 	</menubar>
 
 	<help>
-	  <title>Boeing EC-137D</title>
+	  <title>Boeing E-3 Sentry</title>
 		<key>
 		  <name>L</name>
 		  <desc>toggle Landing Lights</desc>
@@ -170,7 +174,7 @@ if you contacted me before making any changes to this software.
 		<text>
 _______________ Boeing 707 Airborne Warning Control System  ___________________
 
-Military named EC-137x (AWACS)
+Military named E-3 (AWACS)
 
 Startup engines:
 follow the tutorials or use Autostart
@@ -264,22 +268,83 @@ no. D6-3071-00
 		</refuel>
 	</systems>
 
- <instrumentation n="0">
-  <radar n="0">
-   <enabled type="bool">true</enabled>
-   <az-field type="double">120</az-field>
-   <range type="double">160</range>
-   <range-selected type="double">50</range-selected>
-   <display-rdr type="bool">true</display-rdr>
-   <radar-standby type="int">0</radar-standby>
-   <mode>
-    <rws type="bool">true</rws>
-    <tws-auto type="bool">false</tws-auto>
-   </mode>
-  </radar>
- </instrumentation>
+	<instrumentation n="0">
+		<radar n="0">
+			<working type="bool">true</working>
+			<antennae-knob type="double">0</antennae-knob>
+			<range-selected type="double">50</range-selected>
+		</radar>
+  		<iff>
+            <channel_prop type="string">/instrumentation/iff/channel-selection</channel_prop>
+            <power_prop type="string">/instrumentation/iff/power</power_prop>
+            <power type="bool">true</power>
+            <activate type="bool">true</activate>
+            <channel-selection type="int">1</channel-selection>
+            <response type="bool">false</response>
+        </iff>
+        <datalink>
+            <data type="int">0</data>
+            <power type="bool">true</power>
+            <channel type="int">42</channel>
+            <power_prop type="string">/instrumentation/datalink/power</power_prop>
+            <channel_prop type="string">instrumentation/datalink/channel</channel_prop>
+            <receive_period type="double">1</receive_period>
+            <!--identifier_prop type="string">instrumentation/datalink/ident</identifier_prop-->
+        </datalink>
+ 	</instrumentation>
+
+ 	<debug-radar>
+        <debug-main type="int">0</debug-main>
+    </debug-radar>
+
+ 	<payload>
+ 		<d-config>
+	        <full_damage_dist_m type="double">0</full_damage_dist_m>
+	        <use_hitpoints_instead_of_failure_modes_bool type="bool">false</use_hitpoints_instead_of_failure_modes_bool>
+	        <hp_max type="double">80</hp_max>
+	        <hitable_by_air_munitions type="bool">true</hitable_by_air_munitions>
+	        <hitable_by_cannon type="bool">true</hitable_by_cannon>
+	        <is_fleet type="bool">false</is_fleet>
+	        <rwr_to_screen type="bool">true</rwr_to_screen>
+	        <rwr_audio_extended type="bool">true</rwr_audio_extended>
+	        <tacview_supported type="bool">false</tacview_supported>
+	        <m28_auto type="bool">false</m28_auto>
+	        <mlw_max type="double">0</mlw_max>
+	        <auto_flare_caller type="bool">false</auto_flare_caller>
+	    </d-config>
+	    <armament>	        
+	        <msg type="bool">true</msg>
+	        <tacview type="bool">false</tacview>
+	        <models type="string">Aircraft/707/Models/E-3/</models>
+	        <enable-craters type="bool">true</enable-craters>
+	        <MLW-bearing type="double">0</MLW-bearing>
+	        <MLW-count type="int">0</MLW-count>
+	        <MLW-launcher type="string"></MLW-launcher>
+	        <MAW-bearing type="double">0</MAW-bearing>
+	        <MAW-active type="bool">false</MAW-active>
+	        <MAW-semiactive type="bool">false</MAW-semiactive>
+	        <MAW-semiactive-callsign type="string"></MAW-semiactive-callsign>
+	        <spike type="bool">false</spike>
+	    </armament>
+ 	</payload>
 	
-	<nasal> 
+	<nasal>
+		<hack><file>Aircraft/707/Nasal/E-3/hackCanvas.nas</file></hack>
+		<vector><file>Aircraft/707/Nasal/E-3/vector.nas</file></vector>
+		<notifications><file>Aircraft/707/Nasal/E-3/ArmamentNotification.nas</file>
+		               <file>Aircraft/707/Nasal/E-3/GeoBridgedTransmitter.nas</file></notifications>
+		<damage><file>Aircraft/707/Nasal/E-3/damage.nas</file></damage>
+		<crash><file>Aircraft/707/Nasal/E-3/crash-and-stress.nas</file></crash>
+		<iff><file>Aircraft/707/Nasal/E-3/iff.nas</file></iff>
+		<datalink><file>Aircraft/707/Nasal/E-3/datalink.nas</file></datalink>
+		<rcs><file>Aircraft/707/Nasal/E-3/rcs_mand.nas</file>
+		         <file>Aircraft/707/Nasal/E-3/rcs.nas</file></rcs>
+		<e3><file>Aircraft/707/Nasal/E-3/e3.nas</file></e3>
+		<radar_system>
+			<file>Aircraft/707/Nasal/E-3/radar-system.nas</file>
+			<file>Aircraft/707/Nasal/E-3/an-apy-1.nas</file>
+		</radar_system>
+
 		<b707>		
 			<file>Aircraft/707/Nasal/shake.nas</file>
 			<file>Aircraft/707/Nasal/autostart.nas</file>
@@ -298,13 +363,26 @@ no. D6-3071-00
 			<file>Aircraft/707/Nasal/brakesystem.nas</file>
 			<file>Aircraft/707/Nasal/autopilot-routemanager.nas</file>
 			<file>Aircraft/707/Nasal/autopilot-Bendix-PB-20.nas</file>
-			<file>Aircraft/707/Nasal/tcas.nas</file>
+			<!--file>Aircraft/707/Nasal/tcas.nas</file-->
 			<file>Aircraft/707/Nasal/registration.nas</file>
 			<file>Aircraft/707/Nasal/manual.nas</file>
 		</b707> 
 		<aar>
 			<file>Aircraft/Generic/aar.nas</file>
 		</aar>
+		
 	</nasal>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </PropertyList>

@@ -29,6 +29,8 @@ if you contacted me before making any changes to this software.
 		<splash-texture>Aircraft/707/splash.png</splash-texture>
 	</startup>
 
+	<variant-of>E-3</variant-of>
+
   <model n="0">
    	 <path>Aircraft/707/Models/707.xml</path>
       <livery>

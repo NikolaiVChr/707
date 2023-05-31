@@ -30,7 +30,7 @@ if you contacted me before making any changes to this software.
     <status>2.2.7</status>
     <flight-model>null</flight-model>
 	
-	<variant-of>707</variant-of>
+	<variant-of>E-3</variant-of>
 
     <model>
       <path archive="y">Aircraft/707/Models/707-PAX.xml</path>
