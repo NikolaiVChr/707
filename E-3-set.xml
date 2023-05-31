@@ -121,6 +121,13 @@ if you contacted me before making any changes to this software.
 	                ]]></script>
 	              </binding>
 	            </item>
+	            <item>
+					<label>Combat event log</label>
+					<binding>
+						<command>dialog-show</command>
+						<dialog-name>flightlog</dialog-name>
+					</binding>
+				</item>
 			</menu>
 		</default>
 	</menubar>
@@ -272,8 +279,12 @@ no. D6-3071-00
 	</systems>
 
 	<instrumentation n="0">
+		<rwr n="0">
+			<serviceable type="bool">true</serviceable>
+		</rwr>
 		<radar n="0">
-			<working type="bool">true</working>
+			<knob type="bool">true</knob>
+			<serviceable type="bool">true</serviceable>
 			<antennae-knob type="double">0</antennae-knob>
 			<range-selected type="double">50</range-selected>
 		</radar>

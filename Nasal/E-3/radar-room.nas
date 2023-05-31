@@ -486,7 +486,7 @@ RadarScreenLeft = {
             me.clos = "      ";
         }
 
-        me.lockInfoText = sprintf("%s     %s     SPD%4d   %s", me.azimuth, me.heady, contact.get_Speed(), me.clos);
+        me.lockInfoText = sprintf("%s %s  %s  SPD%4d %s", contact.getModel(), me.azimuth, me.heady, contact.get_Speed(), me.clos);
 
         me.lockInfo.setText(me.lockInfoText);
         me.showLockInfo = 1;
@@ -512,7 +512,7 @@ RadarScreenLeft = {
             me.clos = "      ";
         }
 
-        me.lockInfoText = sprintf("%s     %s     SPD%4d   %s", me.azimuth, me.heady, contact.get_Speed(), me.clos);
+        me.lockInfoText = sprintf("%s %s  %s  SPD%4d %s", contact.getModel(), me.azimuth, me.heady, contact.get_Speed(), me.clos);
 
         me.lockInfo2.setText(me.lockInfoText);
         me.showLockInfo2 = 1;
@@ -595,7 +595,7 @@ RadarScreenLeft = {
             me.lastHead = me.to.getLastHeading();
             me.toSpeed = me.to.getLastSpeed();
             me.fromSpeed = me.from.getLastSpeed();
-            if (me.fromSpeed != nil and me.toSpeed != nil and me.lastHead != nil and me.from.getType() == radar_system.AIR and me.to.getType() == radar_system.AIR) {
+            if (me.fromSpeed != nil and me.toSpeed != nil and me.fromSpeed != 0 and me.toSpeed != 0 and me.lastHead != nil and me.from.getType() == radar_system.AIR and me.to.getType() == radar_system.AIR) {
                 # we cheat a bit here with getting current properties:
                 # bearingToRunner_deg, dist_m, runnerHeading_deg, runnerSpeed_mps, chaserSpeed_mps, chaserCoord, chaserHeading
                 me.fromCoord = me.from.getLastCoord();
@@ -725,11 +725,25 @@ var get_intercept = func(bearingToRunner, dist_m, runnerHeading, runnerSpeed, ch
     } else {
           timeToIntercept = math.max(t1, t2);
     }
+
+    # some feeble attempt to handle time being not a number:
+    timeToIntercept = math.max(0.5, timeToIntercept);
+    if (timeToIntercept < 1) {
+          return nil;
+    }
+    
+
+
     var InterceptPosition = vector.Math.plus(RunnerPosition, vector.Math.product(timeToIntercept, RunnerVelocity));
 
     var ChaserVelocity = vector.Math.product(1/timeToIntercept, vector.Math.minus(InterceptPosition, ChaserPosition));
-
+call(func{
     var interceptAngle = vector.Math.angleBetweenVectors([0,1,0], ChaserVelocity);
+}, nil, nil, var err =[]);
+    if (size(err)) {
+      # If timeToIntercept is very big this will go into effect.
+          return nil;
+    }
     var interceptHeading = geo.normdeg(ChaserVelocity[0]<0?-interceptAngle:interceptAngle);
 
     var interceptDist = chaserSpeed*timeToIntercept;

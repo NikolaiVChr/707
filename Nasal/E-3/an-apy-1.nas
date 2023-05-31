@@ -1090,17 +1090,9 @@ DatalinkRadar = {
 
 
 
-
-#   █████  ██████   ██████         ██████   █████ 
-#  ██   ██ ██   ██ ██             ██       ██   ██ 
-#  ███████ ██████  ██   ███ █████ ███████   █████  
-#  ██   ██ ██      ██    ██       ██    ██ ██   ██ 
-#  ██   ██ ██       ██████         ██████   █████  
-#                                                 
-#
-var APG68 = {
+var APY1 = {
 	#
-	# Root modes is  0: CRM  1: ACM 2: SEA 3: GM 4: GMT
+	# 
 	#
 	instantFoVradius: 5,#average of horiz/vert radius
 	rcsRefDistance: 350,
@@ -1110,8 +1102,8 @@ var APG68 = {
 	fieldOfRegardMaxElev: 15,
 	fieldOfRegardMinElev: 15,
 	isEnabled: func {
-		var working = getprop("instrumentation/mptcas/on");#and !getprop("/fdm/jsbsim/gear/unit[0]/WOW") and getprop("instrumentation/radar/serviceable");
-		setprop("instrumentation/radar/working", working);
+		var working = getprop("instrumentation/radar/knob") and !getprop("/fdm/jsbsim/gear/unit[0]/WOW") and getprop("instrumentation/radar/serviceable");
+		setprop("instrumentation/mptcas/on", working);
 		return working;
 	},
 };
@@ -1446,7 +1438,7 @@ var ecm = ECMChecker.new(0.05, 6);
 
 # start specific radar system
 var rwsMode = SearchMode.new();
-var apy1Radar = AirborneRadar.newAirborne([[rwsMode]], APG68);
+var apy1Radar = AirborneRadar.newAirborne([[rwsMode]], APY1);
 var f16_rwr = RWR.new();
 
 

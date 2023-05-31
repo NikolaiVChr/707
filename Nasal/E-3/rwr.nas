@@ -487,6 +487,11 @@ RWRCanvas = {
         if (me.spot >= size(me.sep_spots[me.threat])) me.spot = 0;
     },
     update: func (list, type) {
+        if (!getprop("instrumentation/rwr/serviceable") or getprop("b707/ess-bus") < 20) {
+            me.rootCenter.hide();
+            return;
+        }
+        me.rootCenter.show();
         if (me.noiseup == 10) {
             me.noisebar.setTranslation(0,me.circle_radius_small*0.25);
         } elsif (me.noiseup == 1) {
