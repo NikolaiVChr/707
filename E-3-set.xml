@@ -179,6 +179,18 @@ if you contacted me before making any changes to this software.
 		  <name>F9</name>
 		  <desc>open Fuel &amp; Weight Menu</desc>
 		</key>
+		<key>
+		  <name>Ctrl-q</name>
+		  <desc>Toggle auto countermeasures</desc>
+		</key>
+		<key>
+		  <name>q</name>
+		  <desc>Release countermeasures (manually)</desc>
+		</key>
+		<key>
+		  <name>Shift-q</name>
+		  <desc>Reset view</desc>
+		</key>
 		<text>
 _______________ Boeing 707 Airborne Warning Control System  ___________________
 
