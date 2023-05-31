@@ -153,6 +153,12 @@ RadarScreenLeft = {
                 .setColor(colorYellow)
                 .set("z-index",1)
                 .setFontSize(15, 1.0);
+        rdr1.interceptText = rdr1.rootCenter.createChild("text")
+                .setTranslation(-diam*0.25*1.5, diam*0.30)
+                .setAlignment("left-center")
+                .setColor(colorLightBlue)
+                .set("z-index",1)
+                .setFontSize(15, 1.0);
         rdr1.rangeInfo = rdr1.rootCenter.createChild("text")
                 .setTranslation(-diam*0.25*1.5, diam*0.35)
                 .setAlignment("left-center")
@@ -165,9 +171,79 @@ RadarScreenLeft = {
                             .lineTo(-10,0)
                             .moveTo(0,-10)
                             .vert(20)
-                            .setColor(1,1,1)
+                            .setColor(colorYellow)
                             .set("z-index",14)
                             .setStrokeLineWidth(2);
+        var tick_long = radius*0.25;
+        var tick_short = tick_long*0.5;
+        rdr1.compas1 = rdr1.rootCenter.createChild("path")# minor ticks
+           .moveTo(radius*math.cos(30*D2R),radius*math.sin(-30*D2R))
+           .lineTo((radius-tick_short)*math.cos(30*D2R),(radius-tick_short)*math.sin(-30*D2R))
+           .moveTo(radius*math.cos(15*D2R),radius*math.sin(-15*D2R))
+           .lineTo((radius-tick_short)*math.cos(15*D2R),(radius-tick_short)*math.sin(-15*D2R))
+           .moveTo(radius*math.cos(45*D2R),radius*math.sin(-45*D2R))
+           .lineTo((radius-tick_short)*math.cos(45*D2R),(radius-tick_short)*math.sin(-45*D2R))
+           .moveTo(radius*math.cos(60*D2R),radius*math.sin(-60*D2R))
+           .lineTo((radius-tick_short)*math.cos(60*D2R),(radius-tick_short)*math.sin(-60*D2R))
+           .moveTo(radius*math.cos(75*D2R),radius*math.sin(-75*D2R))
+           .lineTo((radius-tick_short)*math.cos(75*D2R),(radius-tick_short)*math.sin(-75*D2R))
+           
+           .moveTo(radius*math.cos(30*D2R),radius*math.sin(30*D2R))
+           .lineTo((radius-tick_short)*math.cos(30*D2R),(radius-tick_short)*math.sin(30*D2R))
+           .moveTo(radius*math.cos(15*D2R),radius*math.sin(15*D2R))
+           .lineTo((radius-tick_short)*math.cos(15*D2R),(radius-tick_short)*math.sin(15*D2R))
+           .moveTo(radius*math.cos(45*D2R),radius*math.sin(45*D2R))
+           .lineTo((radius-tick_short)*math.cos(45*D2R),(radius-tick_short)*math.sin(45*D2R))
+           .moveTo(radius*math.cos(60*D2R),radius*math.sin(60*D2R))
+           .lineTo((radius-tick_short)*math.cos(60*D2R),(radius-tick_short)*math.sin(60*D2R))
+           .moveTo(radius*math.cos(75*D2R),radius*math.sin(75*D2R))
+           .lineTo((radius-tick_short)*math.cos(75*D2R),(radius-tick_short)*math.sin(75*D2R))
+
+           .moveTo(-radius*math.cos(30*D2R),radius*math.sin(-30*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(30*D2R),(radius-tick_short)*math.sin(-30*D2R))
+           .moveTo(-radius*math.cos(15*D2R),radius*math.sin(-15*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(15*D2R),(radius-tick_short)*math.sin(-15*D2R))
+           .moveTo(-radius*math.cos(45*D2R),radius*math.sin(-45*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(45*D2R),(radius-tick_short)*math.sin(-45*D2R))
+           .moveTo(-radius*math.cos(60*D2R),radius*math.sin(-60*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(60*D2R),(radius-tick_short)*math.sin(-60*D2R))
+           .moveTo(-radius*math.cos(75*D2R),radius*math.sin(-75*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(75*D2R),(radius-tick_short)*math.sin(-75*D2R))
+           
+           .moveTo(-radius*math.cos(30*D2R),radius*math.sin(30*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(30*D2R),(radius-tick_short)*math.sin(30*D2R))
+           .moveTo(-radius*math.cos(15*D2R),radius*math.sin(15*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(15*D2R),(radius-tick_short)*math.sin(15*D2R))
+           .moveTo(-radius*math.cos(45*D2R),radius*math.sin(45*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(45*D2R),(radius-tick_short)*math.sin(45*D2R))
+           .moveTo(-radius*math.cos(60*D2R),radius*math.sin(60*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(60*D2R),(radius-tick_short)*math.sin(60*D2R))
+           .moveTo(-radius*math.cos(75*D2R),radius*math.sin(75*D2R))
+           .lineTo(-(radius-tick_short)*math.cos(75*D2R),(radius-tick_short)*math.sin(75*D2R))
+           .setStrokeLineWidth(rdr1.stroke*1.8)
+           .set("z-index",1)
+           .setColor(colorWhite);
+        rdr1.compas2 = rdr1.rootCenter.createChild("path")# minor ticks
+           .moveTo(radius,0)
+           .lineTo((radius-tick_long),0)
+           
+           .moveTo(0,radius)
+           .lineTo(0,(radius-tick_long))
+
+           .moveTo(-radius,0)
+           .lineTo(-(radius-tick_long),0)
+           
+           .moveTo(0,-radius)
+           .lineTo(0,-(radius-tick_long))
+
+           .moveTo(0,-radius)
+           .lineTo(-tick_short,-(radius-tick_short))
+           .moveTo(0,-radius)
+           .lineTo(tick_short,-(radius-tick_short))
+
+           .setStrokeLineWidth(rdr1.stroke*1.2)
+           .set("z-index",1)
+           .setColor(colorWhite);
 
         return rdr1;
     },
@@ -224,7 +300,7 @@ RadarScreenLeft = {
               # Paint bleps with tracks
               if (contact["blue"] != 2) me.bleppy = me.bleps[me.sizeBleps-1];
               if (contact["blue"] == 2 or (me.bleppy.hasTrackInfo() and me.elapsed - me.bleppy.getBlepTime() < radar_system.apy1Radar.timeToKeepBleps)) {
-                  me.color = contact["blue"] == 2?colorLightBlue:colorWhite;
+                  me.color = contact["blue"] == 2?colorRed:colorWhite;
                   if (contact["blue"] == 2) {
                       me.c_heading    = contact.getHeading();
                       me.c_devheading = contact.getDeviationHeading();
@@ -238,7 +314,7 @@ RadarScreenLeft = {
                       me.c_alt        = me.bleppy.getAltitude();
                       me.distPixels   = me.bleppy.getRangeNow()*(me.radius/(radar_system.apy1Radar.getRange()*NM2M));
                   }
-                  me.rot = 22.5*math.round((me.c_heading-radar_system.self.getHeading()-me.c_devheading)/22.5);
+                  me.rot = 22.5*math.round((me.c_heading-radar_system.self.getHeading())/22.5);
                   me.blepTrianglePaths[me.ii].setRotation(me.rot*D2R);
                   me.blepTrianglePaths[me.ii].setColor(me.color);
                   me.echoPos = me.calcPos(geo.normdeg180(me.c_devheading), me.distPixels);
@@ -309,6 +385,68 @@ RadarScreenLeft = {
               }
           }
       },
+    paintDL: func (contact) {
+        if (contact.blue != 1) return;
+        if (contact["iff"] != nil) {
+            if (contact.iff > 0 and me.elapsed-contact.iff < 3.5) {
+                me.myiff = 1;
+            } elsif (contact.iff < 0 and me.elapsed+contact.iff < 3.5) {
+                me.myiff = -1;
+            } else {
+                me.myiff = 0;
+            }
+        } else {
+            me.myiff = 0;
+        }
+
+        me.blueBearing = geo.normdeg180(contact.getDeviationHeading());
+        if (me.myiff == 0 and contact.isVisible() and contact.getRange()*M2NM < 125 and me.iii < me.maxT and math.abs(me.blueBearing) < 60) {
+            me.distPixels = contact.get_range()*(me.radius/(radar_system.apy1Radar.getRange()));
+            me.echoPos = me.calcPos(geo.normdeg180(me.blueBearing), me.distPixels);
+            if (me.echoPos == nil) {
+                return;
+            }
+            me.lnkT[me.iii].setColor(colorLightBlue);
+            me.lnkT[me.iii].setTranslation(me.echoPos[0],me.echoPos[1]-25);
+            me.lnkT[me.iii].setText(""~contact.blueIndex);
+            me.lnkT[me.iii].show();
+            me.lnkTA[me.iii].setColor(colorLightBlue);
+            me.lnkTA[me.iii].setTranslation(me.echoPos[0],me.echoPos[1]+20);
+            me.lnkTA[me.iii].setText(""~math.round(contact.getAltitude()*0.001));
+            me.lnkTA[me.iii].show();
+            me.lnk[me.iii].setColor(colorLightBlue);
+            me.lnk[me.iii].setTranslation(me.echoPos);
+            me.lnk[me.iii].setRotation(D2R*22.5*math.round( geo.normdeg(contact.get_heading()-radar_system.self.getHeading())/22.5 ));#Show rotation in increments of 22.5 deg
+            me.lnk[me.iii].show();
+            me.lnk[me.iii].update();
+            if (contact.equalsFast(radar_system.apy1Radar.getPriorityTarget())) {
+                me.selectShow = contact.getType() == radar_system.AIR;
+                me.selection.setTranslation(me.echoPos);
+                me.selection.setColor(colorLightBlue);
+                me.printInfo(contact);
+            } elsif (contact.equalsFast(radar_system.apy1Radar.currentMode.priorityTarget2)) {
+                me.selectShow2 = contact.getType() == radar_system.AIR;
+                me.selection.setTranslation(me.echoPos);
+                me.selection.setColor(colorLightBlue);
+                me.printInfo2(contact);
+            }
+            me.calcClick(contact, me.echoPos);
+            me.iii += 1;
+        } elsif (me.myiff != 0 and contact.isVisible() and me.iiii < me.maxT) {
+            me.distPixels = contact.get_range()*(me.radius/(radar_system.apy1Radar.getRange()));
+            me.echoPos = me.calcPos(geo.normdeg180(me.blueBearing), me.distPixels);
+            if (me.echoPos == nil) {
+                return;
+            }
+            me.path = me.myiff == -1?me.iffU[me.iiii]:me.iff[me.iiii];
+            me.pathHide = me.myiff == 1?me.iffU[me.iiii]:me.iff[me.iiii];
+            me.pathHide.hide();
+            me.path.setTranslation(me.echoPos[0],me.echoPos[1]-18);
+            me.path.show();
+
+            me.iiii += 1;
+        }
+    },
     calcPos: func (dev, distPixels) {
         me.echoPosition = [distPixels*math.sin(D2R*dev), -distPixels*math.cos(D2R*dev)];
         return me.echoPosition;
@@ -343,7 +481,7 @@ RadarScreenLeft = {
             me.heady = "   ";
         }
         if (contact.getLastClosureRate() != 0) {
-            me.clos = sprintf("CLO%+4dK",math.round(contact.getLastClosureRate()*0.1)*10);
+            me.clos = sprintf("CLO%+5dK",math.round(contact.getLastClosureRate()*0.1)*10);
         } else {
             me.clos = "      ";
         }
@@ -369,7 +507,7 @@ RadarScreenLeft = {
             me.heady = "   ";
         }
         if (contact.getLastClosureRate() != 0) {
-            me.clos = sprintf("CLO%+4dK",math.round(contact.getLastClosureRate()*0.1)*10);
+            me.clos = sprintf("CLO%+5dK",math.round(contact.getLastClosureRate()*0.1)*10);
         } else {
             me.clos = "      ";
         }
@@ -383,6 +521,8 @@ RadarScreenLeft = {
         radar_system.apy1Radar.currentMode.setRange(getprop("instrumentation/mptcas/display-factor-awacs")*400);
         me.caretPosition = radar_system.apy1Radar.getCaretLinePosition();
         me.caretLine.setRotation(me.caretPosition[0]*D2R);#print(me.caretPosition[0]);
+        me.compas1.setRotation(-radar_system.self.getHeading()*D2R);
+        me.compas2.setRotation(-radar_system.self.getHeading()*D2R);
         me.elapsed = radar_system.elapsedProp.getValue();
 
         me.rangeInfo.setText(sprintf("  DISC: %3d NM  AZ %3d  EL %4.1f", radar_system.apy1Radar.getRange(),me.caretPosition[0],me.caretPosition[1]));
@@ -403,11 +543,26 @@ RadarScreenLeft = {
         me.iii = 0;
         me.iiii = 0;
         me.randoo = rand();
-        foreach(var contact; radar_system.apy1Radar.getActiveBleps()) {
-            if (contact["randoo"] == me.randoo) continue;
+        if (radar_system.datalink_power.getBoolValue()) {
+            foreach(contact; vector_aicontacts_links) {
+                if (contact["blue"] != 1) continue;
+                me.paintDL(contact);
+                contact.randoo = me.randoo;
+            }
+        }
+        if (radar_system.apy1Radar.enabled) {
+            foreach(var contact; radar_system.apy1Radar.getActiveBleps()) {
+                if (contact["randoo"] == me.randoo) continue;
 
-            me.paintRdr(contact);
-            contact.randoo = me.randoo;
+                me.paintRdr(contact);
+                contact.randoo = me.randoo;
+            }
+        }
+        if (radar_system.datalink_power.getBoolValue()) {
+            foreach(contact; vector_aicontacts_links) {
+                me.paintRdr(contact);
+                contact.randoo = me.randoo;
+            }
         }
         me.selection.setVisible(me.selectShow);
         me.selection2.setVisible(me.selectShow2);
@@ -430,6 +585,52 @@ RadarScreenLeft = {
             me.iff[me.iiii].hide();
             me.iffU[me.iiii].hide();
         }
+
+        #
+        # Intercept steering point for designated target
+        #
+        if (radar_system.apy1Radar.getPriorityTarget() != nil and radar_system.apy1Radar.currentMode.priorityTarget2 != nil) {
+            me.from = radar_system.apy1Radar.getPriorityTarget();
+            me.to   = radar_system.apy1Radar.currentMode.priorityTarget2;
+            me.lastHead = me.to.getLastHeading();
+            me.toSpeed = me.to.getLastSpeed();
+            me.fromSpeed = me.from.getLastSpeed();
+            if (me.fromSpeed != nil and me.toSpeed != nil and me.lastHead != nil and me.from.getType() == radar_system.AIR and me.to.getType() == radar_system.AIR) {
+                # we cheat a bit here with getting current properties:
+                # bearingToRunner_deg, dist_m, runnerHeading_deg, runnerSpeed_mps, chaserSpeed_mps, chaserCoord, chaserHeading
+                me.fromCoord = me.from.getLastCoord();
+                me.toCoord = me.to.getLastCoord();
+                me.bearingToRunner_deg = me.fromCoord.course_to(me.toCoord);
+                me.dist_m              = me.fromCoord.distance_to(me.toCoord);
+
+                me.intercept = get_intercept(
+                  me.bearingToRunner_deg,
+                  me.dist_m,
+                  me.lastHead,
+                  me.toSpeed*KT2MPS,
+                  me.fromSpeed*KT2MPS,
+                  me.fromCoord,
+                  me.from.getLastHeading());
+            }
+        }
+        if (me.intercept != nil) {
+            me.interceptCoord = me.intercept[2];
+            #me.interceptDist = me.intercept[3];
+            me.fromCoord = radar_system.self.getCoord();
+            me.dist_m    = me.fromCoord.distance_to(me.interceptCoord);
+            me.course = me.fromCoord.course_to(me.interceptCoord);
+            me.distPixels = me.dist_m*M2NM*(me.radius/radar_system.apy1Radar.getRange());
+            me.echoPos = me.calcPos(geo.normdeg180(me.course - radar_system.self.getHeading()), me.distPixels);
+            me.interceptCross.setTranslation(me.echoPos);
+            me.interceptCross.setVisible(1);
+            var mag_offset = getprop("/orientation/heading-magnetic-deg") - getprop("/orientation/heading-deg");
+            me.txt = sprintf("Intercept: hdg %d magn. %.1f minutes", geo.normdeg(me.intercept[1]+mag_offset), me.intercept[0]/60);
+            me.interceptText.setText(me.txt);
+        } else {
+            me.interceptText.setText("");
+            me.interceptCross.setVisible(0);
+        }
+
         if (cursor_screen == 0 and me.desig_new == nil and cursor_type == 0) {
             radar_system.apy1Radar.undesignate();
         } elsif (me.desig_new != nil) {
@@ -463,6 +664,82 @@ var colorBackground = [0.01, 0.105, 0];
 
 var root = cv.createGroup();
 var rdr1 = RadarScreenLeft.new("RadarScreenLeft", root, [diam/2,diam/2],diam);
+
+
+
+
+var vector_aicontacts_links = [];
+var DLRecipient = emesary.Recipient.new("DLRecipient");
+var startDLListener = func {
+    DLRecipient.radar = radar_system.dlnkRadar;
+    DLRecipient.Receive = func(notification) {
+        if (notification.NotificationType == "DatalinkNotification") {
+            #printf("DL recv: %s", notification.NotificationType);
+            if (me.radar.enabled == 1) {
+                vector_aicontacts_links = notification.vector;
+            }
+            return emesary.Transmitter.ReceiptStatus_OK;
+        }
+        return emesary.Transmitter.ReceiptStatus_NotProcessed;
+    };
+    emesary.GlobalTransmitter.Register(DLRecipient);
+}
+
+var get_intercept = func(bearingToRunner, dist_m, runnerHeading, runnerSpeed, chaserSpeed, chaserCoord, chaserHeading) {
+    # from Leto
+    # needs: bearingToRunner_deg, dist_m, runnerHeading_deg, runnerSpeed_mps, chaserSpeed_mps, chaserCoord, chaserHeading
+    #        dist_m > 0 and chaserSpeed > 0
+
+    if (dist_m < 500) {
+        return nil;
+    }
+
+    var trigAngle = 90-bearingToRunner;
+    var RunnerPosition = [dist_m*math.cos(trigAngle*D2R), dist_m*math.sin(trigAngle*D2R),0];
+    var ChaserPosition = [0,0,0];
+
+    var VectorFromRunner = vector.Math.minus(ChaserPosition, RunnerPosition);
+    var runner_heading = 90-runnerHeading;
+    var RunnerVelocity = [runnerSpeed*math.cos(runner_heading*D2R), runnerSpeed*math.sin(runner_heading*D2R),0];
+
+    var a = chaserSpeed * chaserSpeed - runnerSpeed * runnerSpeed;
+    var b = 2 * vector.Math.dotProduct(VectorFromRunner, RunnerVelocity);
+    var c = -dist_m * dist_m;
+
+    if ((b*b-4*a*c)<0) {
+      # intercept not possible
+      return nil;
+    }
+
+    var t1 = (-b+math.sqrt(b*b-4*a*c))/(2*a);
+    var t2 = (-b-math.sqrt(b*b-4*a*c))/(2*a);
+
+    if (t1 < 0 and t2 < 0) {
+      # intercept not possible
+      return nil;
+    }
+
+    var timeToIntercept = 0;
+    if (t1 > 0 and t2 > 0) {
+          timeToIntercept = math.min(t1, t2);
+    } else {
+          timeToIntercept = math.max(t1, t2);
+    }
+    var InterceptPosition = vector.Math.plus(RunnerPosition, vector.Math.product(timeToIntercept, RunnerVelocity));
+
+    var ChaserVelocity = vector.Math.product(1/timeToIntercept, vector.Math.minus(InterceptPosition, ChaserPosition));
+
+    var interceptAngle = vector.Math.angleBetweenVectors([0,1,0], ChaserVelocity);
+    var interceptHeading = geo.normdeg(ChaserVelocity[0]<0?-interceptAngle:interceptAngle);
+
+    var interceptDist = chaserSpeed*timeToIntercept;
+
+    var interceptCoord = geo.Coord.new(chaserCoord);
+    interceptCoord = interceptCoord.apply_course_distance(interceptHeading, interceptDist);
+    var interceptRelativeBearing = geo.normdeg180(interceptHeading-chaserHeading);
+
+    return [timeToIntercept, interceptHeading, interceptCoord, interceptDist, interceptRelativeBearing];
+}
 
 var timer = maketimer(0.05, func rdr1.update(););
 timer.start();
