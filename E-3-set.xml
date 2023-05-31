@@ -252,6 +252,9 @@ no. D6-3071-00
 			<dynamic-view type="bool">true</dynamic-view>
     </config>
 	</view> 
+	<multiplay n="0">
+		<visibility-range-nm type="int">450</visibility-range-nm>
+    </multiplay>
  </sim>
  
 	<tanker type="bool">false</tanker>
