@@ -740,8 +740,9 @@ var get_intercept = func(bearingToRunner, dist_m, runnerHeading, runnerSpeed, ch
     var InterceptPosition = vector.Math.plus(RunnerPosition, vector.Math.product(timeToIntercept, RunnerVelocity));
 
     var ChaserVelocity = vector.Math.product(1/timeToIntercept, vector.Math.minus(InterceptPosition, ChaserPosition));
+    var interceptAngle = 5;
 call(func{
-    var interceptAngle = vector.Math.angleBetweenVectors([0,1,0], ChaserVelocity);
+    interceptAngle = vector.Math.angleBetweenVectors([0,1,0], ChaserVelocity);
 }, nil, nil, var err =[]);
     if (size(err)) {
       # If timeToIntercept is very big this will go into effect.

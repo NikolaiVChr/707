@@ -1094,7 +1094,7 @@ var APY1 = {
 	#
 	# 
 	#
-	instantFoVradius: 5,#average of horiz/vert radius
+	instantFoVradius: 4,#average of horiz/vert radius
 	rcsRefDistance: 350,
 	rcsRefValue: 63,
 	targetHistory: 4,
@@ -1171,7 +1171,7 @@ var SearchMode = {
 		me.radar.horizonStabilized = 1;# Might be unset inside preStep()
 		me.preStep();
 
-		me.maxMove = math.min(me.radar.instantFoVradius*1.25, me.discSpeed_dps*dt);# 1.25 is because the FoV is round so we overlap em a bit
+		me.maxMove = -math.min(me.radar.instantFoVradius*1.25, me.discSpeed_dps*dt);# 1.25 is because the FoV is round so we overlap em a bit
 		me.currentPos = me.radar.positionDirection;
 		if (!me.lowering) {
 			me.newPos = vector.Math.rotateVectorAroundVector(me.currentPos, [0,0,1], me.maxMove);
@@ -1184,11 +1184,11 @@ var SearchMode = {
 			}
 		}
 		me.radar.setAntennae(me.newPos);
-		if (me.currentPos[1] < 0 and me.newPos[1] >= 0) {
+		if (me.currentPos[1] > 0 and me.newPos[1] <= 0) {
 			# a whole round has been completed
 			me.frameCompleted();
 		}
-		return dt-me.maxMove/me.discSpeed_dps;# The 0.001 is for presicion errors.
+		return dt+me.maxMove/me.discSpeed_dps;# The 0.001 is for presicion errors.
 	},
 	frameCompleted: func {
 		#print("frame ",me.radar.elapsed-me.lastFrameStart);
