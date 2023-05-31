@@ -35,7 +35,7 @@ RadarScreenLeft = {
 
         rdr1.caretLine = rdr1.rootCenter.createChild("path")
            .vert(-radius)
-           .setStrokeLineWidth(rdr1.stroke*1.8)
+           .setStrokeLineWidth(rdr1.stroke*2.5)
            .set("z-index",11)
            .setColor(colorLightGreen);
 
