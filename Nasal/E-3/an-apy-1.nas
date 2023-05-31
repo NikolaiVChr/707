@@ -1388,10 +1388,10 @@ var RWR = {
 
         me.autoFlare *= 0.1 * 2.5 * !getprop("/fdm/jsbsim/gear/unit[0]/WOW");#0.1 being the update rate for flare dropping code.
 
-#        setprop("ai/submodels/submodel[0]/flare-auto-release-cmd", me.autoFlare * (getprop("ai/submodels/submodel[0]/count")>0));
- #       if (me.autoFlare > 0.80 and rand()>0.99 and getprop("ai/submodels/submodel[0]/count") < 1) {
-  #          setprop("ai/submodels/submodel[0]/flare-release-out-snd", 1);
-   #     }
+        setprop("ai/submodels/submodel[0]/flare-auto-release-cmd", me.autoFlare * (getprop("ai/submodels/submodel[0]/count")>0));
+        if (me.autoFlare > 0.80 and rand()>0.99 and getprop("ai/submodels/submodel[0]/count") < 1) {
+            setprop("ai/submodels/submodel[0]/flare-release-out-snd", 1);
+        }
         emesary.GlobalTransmitter.NotifyAll(me.RWRNotification.updateV(me.vector_aicontacts_threats));
 	},
 	del: func {

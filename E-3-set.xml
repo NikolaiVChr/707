@@ -262,6 +262,10 @@ no. D6-3071-00
 	<multiplay n="0">
 		<visibility-range-nm type="int">450</visibility-range-nm>
     </multiplay>
+    <submodels>
+            <serviceable type="bool">1</serviceable>
+            <path>Aircraft/707/Systems/submodels.xml</path>
+  	</submodels>
  </sim>
  
 	<tanker type="bool">false</tanker>
@@ -281,9 +285,10 @@ no. D6-3071-00
 	<instrumentation n="0">
 		<rwr n="0">
 			<serviceable type="bool">true</serviceable>
+			<auto-cm type="bool">true</auto-cm>
 		</rwr>
 		<radar n="0">
-			<knob type="bool">true</knob>
+			<knob type="bool">false</knob>
 			<serviceable type="bool">true</serviceable>
 			<antennae-knob type="double">0</antennae-knob>
 			<range-selected type="double">50</range-selected>
@@ -311,6 +316,15 @@ no. D6-3071-00
         <debug-main type="int">0</debug-main>
         <debug-stt type="int">0</debug-stt>
     </debug-radar>
+
+    <rotors>
+        <main>
+            <blade n="3">
+                <flap-deg type="double">0</flap-deg>        <!-- used for releasing flares -->
+                <position-deg type="double">0</position-deg><!-- used for releasing chaff  -->
+            </blade>
+        </main>
+    </rotors>
 
  	<payload>
  		<d-config>
