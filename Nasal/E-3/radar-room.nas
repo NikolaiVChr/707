@@ -525,7 +525,7 @@ RadarScreenLeft = {
         me.compas2.setRotation(-radar_system.self.getHeading()*D2R);
         me.elapsed = radar_system.elapsedProp.getValue();
 
-        me.rangeInfo.setText(sprintf("  DISC: %3d NM  AZ %3d  EL %4.1f", radar_system.apy1Radar.getRange(),me.caretPosition[0],me.caretPosition[1]));
+        
 
         me.desig_new = nil;
         me.desig_new2 = nil;
@@ -542,6 +542,9 @@ RadarScreenLeft = {
         me.ii = 0;
         me.iii = 0;
         me.iiii = 0;
+        var callsign = "";
+        if (me.prio != nil and me.prio.getCallsign() != nil) callsign = me.prio.getCallsign();
+        me.rangeInfo.setText(sprintf("  Range: %3d NM      %s", radar_system.apy1Radar.getRange(),callsign));
         me.randoo = rand();
         if (radar_system.datalink_power.getBoolValue()) {
             foreach(contact; vector_aicontacts_links) {
