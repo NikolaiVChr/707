@@ -28,6 +28,7 @@ if you contacted me before making any changes to this software.
   <long-description>
    An AWACS system based on the chassis of a 707.
   </long-description>
+  <expected-aircraft-dir-name>707</expected-aircraft-dir-name>
 	<startup>
 		<!--splash-texture>Aircraft/707/splashEC.png</splash-texture-->
 	</startup>
