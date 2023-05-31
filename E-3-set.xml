@@ -347,6 +347,7 @@ no. D6-3071-00
 			<file>Aircraft/707/Nasal/E-3/radar-system.nas</file>
 			<file>Aircraft/707/Nasal/E-3/an-apy-1.nas</file>
 		</radar_system>
+		<rwr><file>Aircraft/707/Nasal/E-3/rwr.nas</file></rwr>
 
 		<b707>		
 			<file>Aircraft/707/Nasal/shake.nas</file>

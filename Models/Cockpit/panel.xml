@@ -906,6 +906,7 @@ if you contacted me before making any changes to this software.
 	 </model>
 
 	<model>
+    <name>radar707</name>
 		<path>Aircraft/707/Models/Cockpit/Instruments/radar/radar.xml</path>
 		<offsets>
 			<x-m>-18.85</x-m>
@@ -914,6 +915,38 @@ if you contacted me before making any changes to this software.
 			<pitch-deg>-70</pitch-deg>
 		</offsets>
 	</model>
+  <model>
+    <name>radarE3</name>
+    <path>Aircraft/707/Models/Cockpit/Instruments/radar/radarE3.xml</path>
+    <offsets>
+      <x-m>-18.85</x-m>
+      <y-m>-0.0</y-m>
+      <z-m>0.729</z-m>
+      <pitch-deg>-70</pitch-deg>
+    </offsets>
+  </model>
+  <animation>
+    <type>select</type>
+    <object-name>radarE3</object-name>
+    <condition>
+      <equals>
+        <property>sim/aircraft</property>
+        <value>E-3</value>
+      </equals>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>radar707</object-name>
+    <condition>
+      <not>
+      <equals>
+        <property>sim/aircraft</property>
+        <value>E-3</value>
+      </equals>
+    </not>
+    </condition>
+  </animation>
 
 </PropertyList>
 
