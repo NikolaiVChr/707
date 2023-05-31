@@ -137,4 +137,38 @@ if you contacted me before making any changes to this software.
   </binding>
 </key>
 
+<key n="81">
+            <name>Q</name>
+            <desc>Reset view</desc>
+            <binding>
+                <command>nasal</command>
+                <script>e3.resetView();</script>
+            </binding>
+        </key>
+        <key n="113">
+            <name>q</name>
+            <desc>Trigger flare release</desc>
+            <binding>
+                <command>property-assign</command>
+                <property>/ai/submodels/submodel[0]/flare-release-cmd</property>
+                <value type="bool">true</value>
+            </binding>
+            <mod-up>
+                <binding>
+                    <command>property-assign</command>
+                    <property>/ai/submodels/submodel[0]/flare-release-cmd</property>
+                    <value type="bool">false</value>
+                </binding>
+            </mod-up>
+        </key>
+        <key n="17">
+            <name>CTRL-Q</name>
+            <desc>Toggle auto CM</desc>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>/instrumentation/rwr/auto-cm</property>
+            </binding>
+        </key>
+
 </PropertyList>
