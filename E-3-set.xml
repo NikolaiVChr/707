@@ -289,6 +289,7 @@ no. D6-3071-00
 		</rwr>
 		<radar n="0">
 			<knob type="bool">false</knob>
+			<iff type="bool">false</iff>
 			<serviceable type="bool">true</serviceable>
 			<antennae-knob type="double">0</antennae-knob>
 			<range-selected type="double">50</range-selected>
