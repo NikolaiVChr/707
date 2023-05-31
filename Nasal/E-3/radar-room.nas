@@ -759,4 +759,12 @@ call(func{
 }
 
 var timer = maketimer(0.05, func rdr1.update(););
-timer.start();
+timer.simulatedTime = 1;
+
+var main_init_listener = setlistener("sim/signals/fdm-initialized", func {
+    if (getprop("sim/signals/fdm-initialized") == 1) {
+        removelistener(main_init_listener);
+        timer.start();
+        startDLListener();
+      }
+});
