@@ -151,13 +151,13 @@ if you contacted me before making any changes to this software.
             <binding>
                 <command>property-assign</command>
                 <property>/ai/submodels/submodel[0]/flare-release-cmd</property>
-                <value type="bool">true</value>
+                <value>1</value>
             </binding>
             <mod-up>
                 <binding>
                     <command>property-assign</command>
                     <property>/ai/submodels/submodel[0]/flare-release-cmd</property>
-                    <value type="bool">false</value>
+                    <value>0</value>
                 </binding>
             </mod-up>
         </key>
