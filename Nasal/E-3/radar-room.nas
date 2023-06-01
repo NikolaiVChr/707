@@ -1640,6 +1640,18 @@ cv2.addPlacement({"node": "dark", "texture":"radarframe.png"});
 
 cv2.setColorBackground(0.01, 0.105, 0);
 
+var cv3 = canvas.new({
+                     "name": "E-3 RDR RIGHT",
+                     "size": [diam,diam], 
+                     "view": [diam,diam],
+                     "mipmapping": 1
+                    });  
+
+cv3.addPlacement({"node": "dark2", "texture":"radarsup.png"});
+
+cv3.setColorBackground(0.01, 0.105, 0);
+var rwrImage = cv3.createGroup().createChild("image").set("src", "canvas://by-index/texture[3]").setTranslation(0,0);
+
 var colorBackground = [0.01, 0.105, 0];
 
 var root = cv.createGroup();

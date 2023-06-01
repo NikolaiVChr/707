@@ -89,7 +89,7 @@ if you contacted me before making any changes to this software.
         </offsets>
     </model>
     
-    <!--model>
+    <model>
         <name>RAD3</name>
         <path>Aircraft/707/Models/Cockpit/Awacs/radar/radarblindE3.xml</path>
         <offsets>
@@ -97,5 +97,5 @@ if you contacted me before making any changes to this software.
             <y-m>  1.117</y-m>
             <z-m>  1.24</z-m>
         </offsets>
-    </model-->
+    </model>
 </PropertyList>
