@@ -1094,10 +1094,10 @@ var APY1 = {
 	#
 	# 
 	#
-	instantFoVradius: 3.5,#average of horiz/vert radius
+	instantFoVradius: 8.5,#average of horiz/vert radius
 	rcsRefDistance: 350,
 	rcsRefValue: 63,
-	targetHistory: 4,
+	targetHistory: 3,
 	fieldOfRegardMaxAz: 180,
 	fieldOfRegardMaxElev: 15,
 	fieldOfRegardMinElev: 15,
