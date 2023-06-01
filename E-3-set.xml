@@ -37,7 +37,7 @@ if you contacted me before making any changes to this software.
 	<aero>E-3</aero>
 
   <model n="0">
-   	 <path>Aircraft/707/Models/EC-137D.xml</path>
+   	 <path>Aircraft/707/Models/E-3.xml</path>
       <livery>
         <file type="string">EC-137</file>
       </livery>
