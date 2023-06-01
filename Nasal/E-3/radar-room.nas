@@ -466,53 +466,57 @@ RadarScreenLeft = {
         }
     },
     printInfo: func (contact) {
+        if (contact.getLastRangeDirect() != nil) {
+            me.azimuth = sprintf("RN%3dNM", contact.getLastRangeDirect()*M2NM);
+        } else {
+            me.azimuth = "       ";
+        }
         if (contact.getLastHeading() != nil) {
-            me.azimuth = math.round(geo.normdeg180(contact.get_bearing()-contact.getLastHeading())*0.1)*10;
-            if (me.azimuth == 180 or me.azimuth == 0) {
-                me.azSide = " ";
-            } else {
-                me.azSide = me.azimuth > 0 ?"L":"R";
-            }
-            me.azimuth = sprintf("AZ%3d%s", math.abs(me.azimuth), me.azSide);
             me.magn = geo.normdeg(contact.getLastHeading()+radar_system.self.getHeadingMag()-radar_system.self.getHeading());
             me.heady = sprintf("HEA%3d", int(me.magn/10)*10);
         } else {
-            me.azimuth = "    ";
-            me.heady = "   ";
+            me.heady = "      ";
         }
         if (contact.getLastClosureRate() != 0) {
             me.clos = sprintf("CLO%+5dK",math.round(contact.getLastClosureRate()*0.1)*10);
         } else {
-            me.clos = "      ";
+            me.clos = "         ";
+        }
+        if (contact.getLastSpeed() != nil) {
+            me.spd = sprintf("SPD%4d",contact.getLastSpeed());
+        } else {
+            me.spd = "       ";
         }
 
-        me.lockInfoText = sprintf("%s %s  %s  SPD%4d %s", contact.getModel(), me.azimuth, me.heady, contact.get_Speed(), me.clos);
+        me.lockInfoText = sprintf("%s: %s %s %s %s", contact.getModel(), me.azimuth, me.heady, me.spd, me.clos);
 
         me.lockInfo.setText(me.lockInfoText);
         me.showLockInfo = 1;
     },
     printInfo2: func (contact) {
+        if (contact.getLastRangeDirect() != nil) {
+            me.azimuth = sprintf("RN%3dNM", contact.getLastRangeDirect()*M2NM);
+        } else {
+            me.azimuth = "       ";
+        }
         if (contact.getLastHeading() != nil) {
-            me.azimuth = math.round(geo.normdeg180(contact.get_bearing()-contact.getLastHeading())*0.1)*10;
-            if (me.azimuth == 180 or me.azimuth == 0) {
-                me.azSide = " ";
-            } else {
-                me.azSide = me.azimuth > 0 ?"L":"R";
-            }
-            me.azimuth = sprintf("AZ%3d%s", math.abs(me.azimuth), me.azSide);
             me.magn = geo.normdeg(contact.getLastHeading()+radar_system.self.getHeadingMag()-radar_system.self.getHeading());
             me.heady = sprintf("HEA%3d", int(me.magn/10)*10);
         } else {
-            me.azimuth = "    ";
-            me.heady = "   ";
+            me.heady = "      ";
         }
         if (contact.getLastClosureRate() != 0) {
             me.clos = sprintf("CLO%+5dK",math.round(contact.getLastClosureRate()*0.1)*10);
         } else {
-            me.clos = "      ";
+            me.clos = "         ";
+        }
+        if (contact.getLastSpeed() != nil) {
+            me.spd = sprintf("SPD%4d",contact.getLastSpeed());
+        } else {
+            me.spd = "       ";
         }
 
-        me.lockInfoText = sprintf("%s %s  %s  SPD%4d %s", contact.getModel(), me.azimuth, me.heady, contact.get_Speed(), me.clos);
+        me.lockInfoText = sprintf("%s: %s %s %s %s", contact.getModel(), me.azimuth, me.heady, me.spd, me.clos);
 
         me.lockInfo2.setText(me.lockInfoText);
         me.showLockInfo2 = 1;
