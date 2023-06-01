@@ -559,7 +559,7 @@ RWRCanvas = {
             }
             #print("show "~me.i~" "~me.typ~" "~contact[0].getModel()~"  "~contact[1]);
 
-            if (me.contact[0].get_range() > 150) {
+            if (me.contact[0].get_range() > 175) {
                 continue;
             }
 

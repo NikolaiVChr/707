@@ -1095,7 +1095,7 @@ var APY1 = {
 	# 
 	#
 	instantFoVradius: 8.5,#average of horiz/vert radius
-	rcsRefDistance: 350,
+	rcsRefDistance: 325,
 	rcsRefValue: 63,
 	targetHistory: 3,
 	fieldOfRegardMaxAz: 180,
@@ -1237,11 +1237,11 @@ var SearchMode = {
 
 
 
-#  ███████        ██  ██████      ██████  ██     ██ ██████ 
-#  ██            ███ ██           ██   ██ ██     ██ ██   ██ 
-#  █████   █████  ██ ███████      ██████  ██  █  ██ ██████  
-#  ██             ██ ██    ██     ██   ██ ██ ███ ██ ██   ██ 
-#  ██             ██  ██████      ██   ██  ███ ███  ██   ██ 
+#   ██████  ██     ██ ██████ 
+#   ██   ██ ██     ██ ██   ██ 
+#   ██████  ██  █  ██ ██████  
+#   ██   ██ ██ ███ ██ ██   ██ 
+#   ██   ██  ███ ███  ██   ██ 
 #                                                           
 #
 
@@ -1317,7 +1317,7 @@ var RWR = {
         	me.threatDB = me.u.getThreatStored();
             me.cs = me.threatDB[7];
             me.rn = me.threatDB[6];
-            if ((me.u["blue"] != nil and me.u.blue == 1 and !me.threatDB[10]) or me.rn > 150) {
+            if ((me.u["blue"] != nil and me.u.blue == 1 and !me.threatDB[10]) or me.rn > 175) {
                 continue;
             }
             me.bearing = me.threatDB[0];
