@@ -265,6 +265,7 @@ RadarScreenLeft = {
         me.meta = [];
         me.metaCount = 0;
         me.canvasOutlines = {};
+        me.zoomOld = 200;
         var filenameMeta = getprop("sim/aircraft-dir")~"/Outlines/world.e3meta";
         var text = nil;
         call(func{text=io.readfile(filenameMeta);},nil, var err = []);
@@ -294,7 +295,8 @@ RadarScreenLeft = {
         if (math.abs(me.myLat - me.ring.N) < 7 or math.abs(me.myLat - me.ring.S) < 7 or (me.myLat > me.ring.S and me.myLat < me.ring.N)) {
             if (math.abs(me.myLon - me.ring.W) < 7/math.cos(me.myLat*D2R) or math.abs(me.myLon - me.ring.E) < 7/math.cos(me.myLat*D2R)
                 or (me.myLon > me.ring.W and me.myLon < me.ring.E) # inside the country
-                or (me.myLon < me.ring.W and me.myLon > me.ring.E and me.ring.W < 0 and me.ring.E > 0 ) # inside USA (W is low)
+                or (me.myLon < me.ring.W and me.myLon > me.ring.E and me.ring.W < 0 and me.ring.E > 0 ) # inside USA 1 (W is low)
+                or (me.myLon > me.ring.W and me.myLon < me.ring.E and me.ring.W < 0 and me.ring.E > 0 ) # inside USA 2 (W is low)
                 ) {
                 
                 me.loadOutline();
@@ -355,12 +357,22 @@ RadarScreenLeft = {
                 }
                 me.first = 0;
             }
-            me.p.update();
         }
+        #me.gspd = math.max(50, getprop("velocities/groundspeed-kt"))/(60*60));
+
+        #timerOutlines.restart(20/me.gspd);# at this speed, when fly 20 nm more we redraw.
+        timerOutlines.restart(30);
     },
     rotateOutlines: func {
+        me.zoomNew = radar_system.apy1Radar.getRange();
+
         me.myH = radar_system.self.getHeading();
         me.outlineGrp.setRotation(-me.myH*D2R);
+
+        if (me.zoomNew != me.zoomOld) {
+            timerOutlines.restart(0.5);
+        }
+        me.zoomOld = me.zoomNew;
     },
     paintRdr: func (contact) {
           if (contact["iff"] != nil) {
@@ -643,8 +655,9 @@ RadarScreenLeft = {
         radar_system.apy1Radar.currentMode.setRange(getprop("instrumentation/mptcas/display-factor-awacs")*400);
         me.caretPosition = radar_system.apy1Radar.getCaretLinePosition();
         me.caretLine.setRotation(me.caretPosition[0]*D2R);#print(me.caretPosition[0]);
-        me.compas1.setRotation(-radar_system.self.getHeading()*D2R);
-        me.compas2.setRotation(-radar_system.self.getHeading()*D2R);
+        #me.mag_offset = radar_system.self.getHeadingMag() - radar_system.self.getHeading();
+        me.compas1.setRotation(-radar_system.self.getHeadingMag()*D2R);
+        me.compas2.setRotation(-radar_system.self.getHeadingMag()*D2R);
         me.elapsed = radar_system.elapsedProp.getValue();
 
 
@@ -1859,7 +1872,7 @@ call(func{
 var timer = maketimer(0.05, func rdr1.update(););
 timer.simulatedTime = 1;
 
-var timerOutlines = maketimer(1, func rdr1.paintOutlines(););
+var timerOutlines = maketimer(30, func rdr1.paintOutlines(););
 timerOutlines.simulatedTime = 1;
 
 var timer2 = maketimer(0.25, func rdr2.update(););
