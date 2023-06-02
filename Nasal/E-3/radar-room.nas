@@ -269,7 +269,7 @@ RadarScreenLeft = {
         var text = nil;
         call(func{text=io.readfile(filenameMeta);},nil, var err = []);
         if (size(err)) {
-            print("Loading outlines failed.");
+            print("Border data not detected.");
             return;
         }
 
@@ -303,14 +303,14 @@ RadarScreenLeft = {
         }
 
         if (!me.ok and me.canvasOutlines[me.ring.file] != nil) {
-            print("Unloading outline for ", me.ring.file);
+            #print("Unloading outline for ", me.ring.file);
             delete(me.canvasOutlines, me.ring.file);
         }
 
         me.metaCount += 1;
         if (me.metaCount >= size(me.meta)) {
             me.metaCount = 0;
-            ^#print("Finished checking for outlines to load.");
+            #print("Finished checking for outlines to load.");
         }
     },
     loadOutline: func {
