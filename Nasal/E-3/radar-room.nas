@@ -44,6 +44,7 @@ RadarScreenLeft = {
         rdr1.rootCenter = root.createChild("group")
                 .setTranslation(center[0],center[1])
                 .set("font","B612/B612Mono-Bold.ttf");
+        rdr1.outlineGrp = rdr1.rootCenter.createChild("group").set("z-index",1);
 
         rdr1.caretLine = rdr1.rootCenter.createChild("path")
            .vert(-radius)
@@ -257,7 +258,109 @@ RadarScreenLeft = {
            .set("z-index",1)
            .setColor(colorWhite);
 
+        rdr1.initOutline();
         return rdr1;
+    },
+    initOutline: func {
+        me.meta = [];
+        me.metaCount = 0;
+        me.canvasOutlines = {};
+        var filenameMeta = getprop("sim/aircraft-dir")~"/Outlines/world.e3meta";
+        var text = nil;
+        call(func{text=io.readfile(filenameMeta);},nil, var err = []);
+        if (size(err)) {
+            print("Loading outlines failed.");
+            return;
+        }
+
+        var rings = split("\n",text);
+        foreach (var ring; rings) {
+            if (size(ring)<4) continue;
+            var two = split("*",ring);
+            var fileName = two[1];
+            var limits = split(",",two[0]);
+            var struct = {file:fileName,S:limits[0],N:limits[1],W:limits[2],E:limits[3]};
+            append(me.meta, struct);
+        }
+    },
+    testOutline: func {
+        if (!size(me.meta)) return;
+        me.ring = me.meta[me.metaCount];
+        me.myLat = getprop("position/latitude-deg");
+        me.myLon = getprop("position/longitude-deg");
+
+        me.ok = 0;
+
+        if (math.abs(me.myLat - me.ring.N) < 7 or math.abs(me.myLat - me.ring.S) < 7 or (me.myLat > me.ring.S and me.myLat < me.ring.N)) {
+            if (math.abs(me.myLon - me.ring.W) < 7/math.cos(me.myLat*D2R) or math.abs(me.myLon - me.ring.E) < 7/math.cos(me.myLat*D2R)
+                or (me.myLon > me.ring.W and me.myLon < me.ring.E) # inside the country
+                or (me.myLon < me.ring.W and me.myLon > me.ring.E and me.ring.W < 0 and me.ring.E > 0 ) # inside USA (W is low)
+                ) {
+                
+                me.loadOutline();
+                me.ok = 1;
+            }
+        }
+
+        if (!me.ok and me.canvasOutlines[me.ring.file] != nil) {
+            print("Unloading outline for ", me.ring.file);
+            delete(me.canvasOutlines, me.ring.file);
+        }
+
+        me.metaCount += 1;
+        if (me.metaCount >= size(me.meta)) {
+            me.metaCount = 0;
+            ^#print("Finished checking for outlines to load.");
+        }
+    },
+    loadOutline: func {
+        me.ring = me.meta[me.metaCount];
+        if (me.canvasOutlines[me.ring.file] != nil) return;
+        #print("Loading outline for ", me.ring.file);
+        var filenameMeta = getprop("sim/aircraft-dir")~"/Outlines/data/"~me.ring.file;
+        me.outlineText = nil;
+        call(func{me.outlineText=io.readfile(filenameMeta);},nil, var err = []);
+        if (size(err)) {
+            print("Loading ",me.ring.file," failed.");
+            return;
+        }
+        me.outline = [];
+        me.coords = split("|",me.outlineText);
+        foreach (me.coord ; me.coords) {
+            if (!size(me.coord)) continue;
+            me.coordTexts = split(",",me.coord);
+            me.lat = num(me.coordTexts[0]);
+            me.lon = num(me.coordTexts[1]);
+            me.myCoord = geo.Coord.new().set_latlon(me.lat,me.lon);
+            append(me.outline, me.myCoord);
+        }
+        me.canvasOutlines[me.ring.file] = me.outline;
+    },
+    paintOutlines: func {
+        me.myC = radar_system.self.getCoord();
+        #me.myH = radar_system.self.getHeading();
+        me.rdrPix = me.radius/(radar_system.apy1Radar.getRange()*NM2M);
+        me.outlineGrp.removeAllChildren();
+        foreach (me.key ; keys(me.canvasOutlines)) {
+            me.p = me.outlineGrp.createChild("path").setColor(colorBlue).setStrokeLineWidth(me.stroke);
+            me.first = 1;
+            foreach(me.c ; me.canvasOutlines[me.key]) {
+                me.distPixels = me.myC.distance_to(me.c)*me.rdrPix;
+                me.devy = geo.normdeg180(me.myC.course_to(me.c));
+                me.echoPos = me.calcPos(me.devy, me.distPixels);
+                if (!me.first) {
+                    me.p.lineTo(me.echoPos);
+                } else {
+                    me.p.moveTo(me.echoPos);
+                }
+                me.first = 0;
+            }
+            me.p.update();
+        }
+    },
+    rotateOutlines: func {
+        me.myH = radar_system.self.getHeading();
+        me.outlineGrp.setRotation(-me.myH*D2R);
     },
     paintRdr: func (contact) {
           if (contact["iff"] != nil) {
@@ -534,12 +637,16 @@ RadarScreenLeft = {
         me.showLockInfo2 = 1;
     },
     update: func {
+        me.testOutline();
+        me.testOutline();
+        me.rotateOutlines();
         radar_system.apy1Radar.currentMode.setRange(getprop("instrumentation/mptcas/display-factor-awacs")*400);
         me.caretPosition = radar_system.apy1Radar.getCaretLinePosition();
         me.caretLine.setRotation(me.caretPosition[0]*D2R);#print(me.caretPosition[0]);
         me.compas1.setRotation(-radar_system.self.getHeading()*D2R);
         me.compas2.setRotation(-radar_system.self.getHeading()*D2R);
         me.elapsed = radar_system.elapsedProp.getValue();
+
 
         
 
@@ -1752,6 +1859,9 @@ call(func{
 var timer = maketimer(0.05, func rdr1.update(););
 timer.simulatedTime = 1;
 
+var timerOutlines = maketimer(1, func rdr1.paintOutlines(););
+timerOutlines.simulatedTime = 1;
+
 var timer2 = maketimer(0.25, func rdr2.update(););
 timer2.simulatedTime = 1;
 
@@ -1759,6 +1869,7 @@ var main_init_listener = setlistener("sim/signals/fdm-initialized", func {
     if (getprop("sim/signals/fdm-initialized") == 1) {
         removelistener(main_init_listener);
         timer.start();
+        timerOutlines.start();
         rdr2.start();
         timer2.start();
         startDLListener();
