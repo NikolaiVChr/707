@@ -2,6 +2,8 @@
 
 Make sure the folder is named 707
 
+The radar only works when airborne
+
 To select a friendly on radar: left mouse-click on screen
 
 To select a boogie/bandit on radar: middle mouse-click on screen
