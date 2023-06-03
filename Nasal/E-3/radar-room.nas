@@ -1888,3 +1888,7 @@ var main_init_listener = setlistener("sim/signals/fdm-initialized", func {
         startDLListener();
       }
 });
+
+#setlistener("instrumentation/radar/knob", func {
+#    fgcommand("reinit", props.Node.new( {"subsystem": "aircraft-model"} ));
+#});
