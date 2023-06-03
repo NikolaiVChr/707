@@ -7,15 +7,51 @@
 #                                                                                         
 #                                                                                         
 
+var colorBackgroundOld = [0.01, 0.105, 0];
+var colorBackgroundNew = [0.2, 0.2, 0.4];
 var colorGreen = [0.3,1,0.3];
 var colorLightGreen = [0.16,0.8,0.13];
 var colorBG = [0.4,0.48,0.4];
 var colorGrey = [0.5,0.5,0.5];
+var colorLightGrey = [0.75,0.75,0.75];
 var colorRed = [1,0,0];
+var colorLightRed = [1,0.5,0.5];
 var colorBlue = [0,0,1];
 var colorLightBlue = [0.3,0.3,1];
 var colorWhite = [1,1,1];
 var colorYellow = [1,1,0];
+var colorLightBrown = [0.71,0.40,0.11];
+
+var rdrColorEcho                  = colorLightGrey;#
+var rdrColorBackground            = colorBackgroundNew;#
+var rdrColorGroundTrack           = colorWhite;
+var rdrColorDatalink              = colorLightGreen;#
+var rdrColorDatalinkDesignation   = colorLightRed;#
+var rdrColorDesignation1          = colorLightGreen;
+var rdrColorDesignation2          = colorYellow;
+var rdrColorRangeText             = colorGrey;
+var rdrColorBorderOutlines        = colorRed;#
+#var rdrColorBorderFill            = colorLightBrown;#
+var rdrColorIntercept             = colorYellow;
+var rdrColorIffFriendly           = colorLightGreen;#
+var rdrColorIffUnknown            = colorRed;
+var rdrColorCompas                = colorWhite;
+
+var zEcho                  = 10;
+var zEchoSweep             = 20;
+var zGroundTrack           = 25;
+var zDatalink              = 25;
+var zDatalinkDesignation   = 25;
+var zDesignation1          = 25;
+var zDesignation2          = 25;
+var zRangeText             = 40;
+var zBorderOutlines        =  5;
+var zIntercept             = 30;
+var zIffFriendly           = 35;
+var zIffUnknown            = 36;
+var zCompas                = 50;
+
+
 
 var cursor_pos = [0,0];
 var cursor_time = 0;
@@ -44,13 +80,14 @@ RadarScreenLeft = {
         rdr1.rootCenter = root.createChild("group")
                 .setTranslation(center[0],center[1])
                 .set("font","B612/B612Mono-Bold.ttf");
-        rdr1.outlineGrp = rdr1.rootCenter.createChild("group").set("z-index",1);
+        rdr1.outlineGrp = rdr1.rootCenter.createChild("group").set("z-index",zBorderOutlines);
 
         rdr1.caretLine = rdr1.rootCenter.createChild("path")
            .vert(-radius)
-           .setStrokeLineWidth(rdr1.stroke*2.5)
-           .set("z-index",11)
-           .setColor(colorLightGreen);
+           .setStrokeLineWidth(rdr1.stroke)
+           .setStrokeDashArray([25, 50])
+           .set("z-index",zEchoSweep)
+           .setColor(rdrColorEcho);
 
 
         rdr1.maxB = 150;
@@ -68,42 +105,42 @@ RadarScreenLeft = {
         rdr1.iffU = setsize([],rdr1.maxT);# unknown IFF response
         for (var i = 0;i<rdr1.maxB;i+=1) {
                 rdr1.blep[i] = rdr1.rootCenter.createChild("path")
-                        .moveTo(0,-3)
-                        .vert(7)
-                        .setStrokeLineWidth(7)
-                        .setStrokeLineCap("butt")
-                        .set("z-index",10)
+                        .moveTo(0,0)
+                        .vert(1)
+                        .setStrokeLineWidth(6)
+                        .setStrokeLineCap("round")
+                        .set("z-index",zEcho)
                         .hide();
         }
         for (var i = 0;i<rdr1.maxT;i+=1) {
                 rdr1.blepTriangle[i] = rdr1.rootCenter.createChild("group")
-                                .set("z-index",11);
+                                .set("z-index",zGroundTrack);
                 rdr1.blepTriangleVel[i] = rdr1.blepTriangle[i].createChild("group");
                 rdr1.blepTriangleText[i] = rdr1.blepTriangle[i].createChild("text")
                                 .setAlignment("center-top")
                                 .setFontSize(20, 1.0)
                                 .setTranslation(0,20)
-                                .setColor(1, 1, 1);
+                                .setColor(rdrColorGroundTrack);
                 rdr1.blepTriangleVelLine[i] = rdr1.blepTriangleVel[i].createChild("path")
                                 .lineTo(0,-10)
                                 .setTranslation(0,-16)
                                 .setStrokeLineWidth(2)
-                                .setColor(colorRed);
+                                .setColor(rdrColorGroundTrack);
                 rdr1.blepTrianglePaths[i] = rdr1.blepTriangle[i].createChild("path")
                                 .moveTo(-14,8)
                                 .horiz(28)
                                 .lineTo(0,-16)
                                 .lineTo(-14,8)
-                                .setColor(colorRed)
+                                .setColor(rdrColorGroundTrack)
                                 .set("z-index",10)
                                 .setStrokeLineWidth(2);
                 rdr1.iff[i] = rdr1.rootCenter.createChild("path")
                                 .moveTo(-8,0)
                                 .arcSmallCW(8,8, 0,  8*2, 0)
                                 .arcSmallCW(8,8, 0, -8*2, 0)
-                                .setColor(colorBlue)
+                                .setColor(rdrColorIffFriendly)
                                 .hide()
-                                .set("z-index",12)
+                                .set("z-index",zIffFriendly)
                                 .setStrokeLineWidth(3);
                 rdr1.iffU[i] = rdr1.rootCenter.createChild("path")
                                 .moveTo(-8,-8)
@@ -111,9 +148,9 @@ RadarScreenLeft = {
                                 .horiz(16)
                                 .vert(-16)
                                 .horiz(-16)
-                                .setColor(colorRed)
+                                .setColor(rdrColorIffUnknown)
                                 .hide()
-                                .set("z-index",12)
+                                .set("z-index",zIffUnknown)
                                 .setStrokeLineWidth(3);
                 rdr1.lnk[i] = rdr1.rootCenter.createChild("path")
                                 .moveTo(-10,-10)
@@ -123,60 +160,61 @@ RadarScreenLeft = {
                                 .horiz(-20)
                                 .moveTo(0,-10)
                                 .vert(-10)
-                                .setColor(colorLightBlue)
+                                .setColor(rdrColorDatalink)
                                 .hide()
-                                .set("z-index",11)
+                                .set("z-index",zDatalink)
                                 .setStrokeLineWidth(3);
 
             rdr1.lnkT[i] = rdr1.rootCenter.createChild("text")
                 .setAlignment("center-bottom")
-                .setColor(colorLightBlue)
-                .set("z-index",1)
+                .setColor(rdrColorDatalink)
+                .set("z-index",zDatalink)
                 .setFontSize(20, 1.0);
             rdr1.lnkTA[i] = rdr1.rootCenter.createChild("text")
                                 .setAlignment("center-top")
+                                .set("z-index",zDatalink)
                                 .setFontSize(20, 1.0);
         }
         rdr1.selection = rdr1.rootCenter.createChild("group")
-                .set("z-index",12);
+                .set("z-index",zDesignation1);
         rdr1.selectionPath = rdr1.selection.createChild("path")
                 .moveTo(-16, 0)
                 .arcSmallCW(16, 16, 0, 16*2, 0)
                 .arcSmallCW(16, 16, 0, -16*2, 0)
-                .setColor(colorWhite)
+                .setColor(rdrColorDesignation1)
                 .setStrokeLineWidth(2);
         rdr1.selection2 = rdr1.rootCenter.createChild("group")
-                .set("z-index",12);
+                .set("z-index",zDesignation2);
         rdr1.selection2Path = rdr1.selection2.createChild("path")
                 .moveTo(-16, 0)
                 .arcSmallCW(16, 16, 0, 16*2, 0)
                 .arcSmallCW(16, 16, 0, -16*2, 0)
-                .setColor(colorYellow)
+                .setColor(rdrColorDesignation2)
                 .setStrokeLineWidth(2);
 
         rdr1.lockInfo = rdr1.rootCenter.createChild("text")
                 .setTranslation(-diam*0.25*1.5, diam*0.25)
                 .setAlignment("left-center")
-                .setColor(colorGreen)
-                .set("z-index",1)
+                .setColor(rdrColorDesignation1)
+                .set("z-index",zDesignation1)
                 .setFontSize(15, 1.0);
         rdr1.lockInfo2 = rdr1.rootCenter.createChild("text")
                 .setTranslation(-diam*0.25*1.5, -diam*0.25)
                 .setAlignment("left-center")
-                .setColor(colorYellow)
-                .set("z-index",1)
+                .setColor(rdrColorDesignation2)
+                .set("z-index",zDesignation2)
                 .setFontSize(15, 1.0);
         rdr1.interceptText = rdr1.rootCenter.createChild("text")
                 .setTranslation(-diam*0.25*1.5, diam*0.30)
                 .setAlignment("left-center")
-                .setColor(colorLightBlue)
-                .set("z-index",1)
+                .setColor(rdrColorIntercept)
+                .set("z-index",zIntercept)
                 .setFontSize(15, 1.0);
         rdr1.rangeInfo = rdr1.rootCenter.createChild("text")
                 .setTranslation(-diam*0.25*1.5, diam*0.35)
                 .setAlignment("left-center")
-                .setColor(colorGrey)
-                .set("z-index",1)
+                .setColor(rdrColorRangeText)
+                .set("z-index",zRangeText)
                 .setFontSize(15, 1.0);
 
         rdr1.interceptCross = rdr1.rootCenter.createChild("path")
@@ -184,8 +222,8 @@ RadarScreenLeft = {
                             .lineTo(-10,0)
                             .moveTo(0,-10)
                             .vert(20)
-                            .setColor(colorYellow)
-                            .set("z-index",14)
+                            .setColor(rdrColorIntercept)
+                            .set("z-index",zIntercept)
                             .setStrokeLineWidth(2);
         var tick_long = radius*0.25;
         var tick_short = tick_long*0.5;
@@ -233,9 +271,9 @@ RadarScreenLeft = {
            .lineTo(-(radius-tick_short)*math.cos(60*D2R),(radius-tick_short)*math.sin(60*D2R))
            .moveTo(-radius*math.cos(75*D2R),radius*math.sin(75*D2R))
            .lineTo(-(radius-tick_short)*math.cos(75*D2R),(radius-tick_short)*math.sin(75*D2R))
-           .setStrokeLineWidth(rdr1.stroke*1.8)
-           .set("z-index",1)
-           .setColor(colorWhite);
+           .setStrokeLineWidth(rdr1.stroke*1.25)
+           .set("z-index",zCompas)
+           .setColor(rdrColorCompas);
         rdr1.compas2 = rdr1.rootCenter.createChild("path")# minor ticks
            .moveTo(radius,0)
            .lineTo((radius-tick_long),0)
@@ -254,9 +292,9 @@ RadarScreenLeft = {
            .moveTo(0,-radius)
            .lineTo(tick_short,-(radius-tick_short))
 
-           .setStrokeLineWidth(rdr1.stroke*1.2)
-           .set("z-index",1)
-           .setColor(colorWhite);
+           .setStrokeLineWidth(rdr1.stroke*1)
+           .set("z-index",zCompas)
+           .setColor(rdrColorCompas);
 
         rdr1.initOutline();
         return rdr1;
@@ -344,7 +382,7 @@ RadarScreenLeft = {
         me.rdrPix = me.radius/(radar_system.apy1Radar.getRange()*NM2M);
         me.outlineGrp.removeAllChildren();
         foreach (me.key ; keys(me.canvasOutlines)) {
-            me.p = me.outlineGrp.createChild("path").setColor(colorBlue).setStrokeLineWidth(me.stroke);
+            me.p = me.outlineGrp.createChild("path").setColor(rdrColorBorderOutlines).setStrokeLineWidth(me.stroke*0.5);#.setColorFill(rdrColorBorderFill);
             me.first = 1;
             foreach(me.c ; me.canvasOutlines[me.key]) {
                 me.distPixels = me.myC.distance_to(me.c)*me.rdrPix;
@@ -398,21 +436,21 @@ RadarScreenLeft = {
                   }
                   me.color = math.pow(1-(me.elapsed - me.bleppy.getBlepTime())/radar_system.apy1Radar.currentMode.timeToFadeBleps, 2.2);
                   me.blep[me.i].setTranslation(me.echoPos);
-                  me.blep[me.i].setColor(colorLightGreen[0]*me.color+colorBackground[0]*(1-me.color), colorLightGreen[1]*me.color+colorBackground[1]*(1-me.color), colorLightGreen[2]*me.color+colorBackground[2]*(1-me.color));
+                  me.blep[me.i].setColor(rdrColorEcho[0]*me.color+rdrColorBackground[0]*(1-me.color), rdrColorEcho[1]*me.color+rdrColorBackground[1]*(1-me.color), rdrColorEcho[2]*me.color+rdrColorBackground[2]*(1-me.color));
                   me.blep[me.i].show();
                   me.blep[me.i].update();
                   if (contact.equalsFast(radar_system.apy1Radar.getPriorityTarget()) and me.bleppy == me.bleps[size(me.bleps)-1]) {
                       me.selectShowTemp = math.mod(me.elapsed,0.50)<0.25;#todo
                       me.selectShow = me.selectShowTemp and contact.getType() == radar_system.AIR;
                       me.selection.setTranslation(me.echoPos);
-                      me.selection.setColor(colorGreen);
+                      me.selection.setColor(rdrColorDesignation1);
                       me.printInfo(contact);
                       me.showLockInfo = 1;
                   } elsif (contact.equalsFast(radar_system.apy1Radar.currentMode.priorityTarget2) and me.bleppy == me.bleps[size(me.bleps)-1]) {
                       me.selectShowTemp = math.mod(me.elapsed,0.50)<0.25;#todo
                       me.selectShow2 = me.selectShowTemp and contact.getType() == radar_system.AIR;
                       me.selection2.setTranslation(me.echoPos);
-                      me.selection2.setColor(colorYellow);
+                      me.selection2.setColor(rdrColorDesignation2);
                       me.printInfo2(contact);
                       me.showLockInfo2 = 1;
                   }
@@ -427,7 +465,7 @@ RadarScreenLeft = {
               # Paint bleps with tracks
               if (contact["blue"] != 2) me.bleppy = me.bleps[me.sizeBleps-1];
               if (contact["blue"] == 2 or (me.bleppy.hasTrackInfo() and me.elapsed - me.bleppy.getBlepTime() < radar_system.apy1Radar.timeToKeepBleps)) {
-                  me.color = contact["blue"] == 2?colorRed:colorWhite;
+                  me.color = contact["blue"] == 2?rdrColorDatalinkDesignation:rdrColorGroundTrack;
                   if (contact["blue"] == 2) {
                       me.c_heading    = contact.getHeading();
                       me.c_devheading = contact.getDeviationHeading();
@@ -477,14 +515,14 @@ RadarScreenLeft = {
                       me.selectShow = me.blinkShow and contact.getType() == radar_system.AIR;
                       me.blepTriangle[me.ii].setVisible(me.selectShow);
                       me.selection.setTranslation(me.echoPos);
-                      me.selection.setColor(colorGreen);
+                      me.selection.setColor(rdrColorDesignation1);
                       me.printInfo(contact);
                       me.showLockInfo = 1;
                   } elsif (contact.equalsFast(radar_system.apy1Radar.currentMode.priorityTarget2)) {
                       me.selectShow2 = me.blinkShow and contact.getType() == radar_system.AIR;
                       me.blepTriangle[me.ii].setVisible(me.selectShow2);
                       me.selection2.setTranslation(me.echoPos);
-                      me.selection2.setColor(colorYellow);
+                      me.selection2.setColor(rdrColorDesignation2);
                       me.printInfo2(contact);
                       me.showLockInfo2 = 1;
                   }
@@ -533,15 +571,15 @@ RadarScreenLeft = {
             if (me.echoPos == nil) {
                 return;
             }
-            me.lnkT[me.iii].setColor(colorLightBlue);
+            me.lnkT[me.iii].setColor(rdrColorDatalink);
             me.lnkT[me.iii].setTranslation(me.echoPos[0],me.echoPos[1]-25);
             me.lnkT[me.iii].setText(""~contact.blueIndex);
             me.lnkT[me.iii].show();
-            me.lnkTA[me.iii].setColor(colorLightBlue);
+            me.lnkTA[me.iii].setColor(rdrColorDatalink);
             me.lnkTA[me.iii].setTranslation(me.echoPos[0],me.echoPos[1]+20);
             me.lnkTA[me.iii].setText(""~math.round(contact.getAltitude()*0.001));
             me.lnkTA[me.iii].show();
-            me.lnk[me.iii].setColor(colorLightBlue);
+            me.lnk[me.iii].setColor(rdrColorDatalink);
             me.lnk[me.iii].setTranslation(me.echoPos);
             me.lnk[me.iii].setRotation(D2R*22.5*math.round( geo.normdeg(contact.get_heading()-radar_system.self.getHeading())/22.5 ));#Show rotation in increments of 22.5 deg
             me.lnk[me.iii].show();
@@ -549,12 +587,12 @@ RadarScreenLeft = {
             if (contact.equalsFast(radar_system.apy1Radar.getPriorityTarget())) {
                 me.selectShow = contact.getType() == radar_system.AIR;
                 me.selection.setTranslation(me.echoPos);
-                me.selection.setColor(colorLightBlue);
+                me.selection.setColor(rdrColorDatalink);
                 me.printInfo(contact);
             } elsif (contact.equalsFast(radar_system.apy1Radar.currentMode.priorityTarget2)) {
                 me.selectShow2 = contact.getType() == radar_system.AIR;
                 me.selection.setTranslation(me.echoPos);
-                me.selection.setColor(colorLightBlue);
+                me.selection.setColor(rdrColorDatalink);
                 me.printInfo2(contact);
             }
             me.calcClick(contact, me.echoPos);
@@ -1747,7 +1785,7 @@ var cv = canvas.new({
 
 cv.addPlacement({"node": "canvas1", "texture":"radarblade.png"});
 
-cv.setColorBackground(0.01, 0.105, 0);
+cv.setColorBackground(rdrColorBackground);
 
 var cv2 = canvas.new({
                      "name": "E-3 RDR MIDDLE",
@@ -1769,10 +1807,9 @@ var cv3 = canvas.new({
 
 cv3.addPlacement({"node": "dark2", "texture":"radarsup.png"});
 
-cv3.setColorBackground(0.01, 0.105, 0);
 var rwrImage = cv3.createGroup().createChild("image").set("src", "canvas://by-index/texture[3]").setTranslation(0,0);
 
-var colorBackground = [0.01, 0.105, 0];
+
 
 var root = cv.createGroup();
 var rdr1 = RadarScreenLeft.new("RadarScreenLeft", root, [diam/2,diam/2],diam);
