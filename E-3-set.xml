@@ -32,9 +32,14 @@ if you contacted me before making any changes to this software.
   <expected-aircraft-dir-name>707</expected-aircraft-dir-name>
 	<previews>
             <preview>
-                <type>exterior</type>
+                <type>interior</type>
                 <splash type="bool">true</splash>
                 <path>gui/splash.png</path>
+            </preview>
+            <preview>
+                <type>exterior</type>
+                <splash type="bool">true</splash>
+                <path>gui/splash-2.png</path>
             </preview>
   </previews>
 	<!--variant-of>707</variant-of-->
