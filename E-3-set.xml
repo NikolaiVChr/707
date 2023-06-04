@@ -26,7 +26,7 @@ if you contacted me before making any changes to this software.
  <sim n="0">
   <description>Boeing E-3 Sentry</description>
   <long-description>
-   An airborne early warning and control (AWACS) system based on the chassis of a 707. Production spanned from 1977 to 1992 where 68 were been built.
+   An airborne early warning and control (AWACS) system based on the chassis of a 707. Production spanned from 1977 to 1992 where 68 were built.
   </long-description>
   <minimum-fg-version>2020.3</minimum-fg-version>
   <expected-aircraft-dir-name>707</expected-aircraft-dir-name>

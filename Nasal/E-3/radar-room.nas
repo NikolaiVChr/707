@@ -764,7 +764,7 @@ RadarScreenLeft = {
         }
 
         #
-        # Intercept steering point for designated target
+        # Intercept steering point for designated targets
         #
         if (radar_system.apy1Radar.getPriorityTarget() != nil and radar_system.apy1Radar.currentMode.priorityTarget2 != nil) {
             me.from = radar_system.apy1Radar.getPriorityTarget();

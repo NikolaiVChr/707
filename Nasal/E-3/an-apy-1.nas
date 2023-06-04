@@ -915,6 +915,9 @@ var RadarMode = {
 		if (c.equalsFast(me["priorityTarget"])) {
 			me.priorityTarget = nil;
 		}
+		if (c.equalsFast(me["priorityTarget2"])) {
+			me.priorityTarget2 = nil;
+		}
 	},
 };#                                    END Radar Mode class
 
