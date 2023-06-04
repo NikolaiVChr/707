@@ -98,4 +98,42 @@ if you contacted me before making any changes to this software.
             <z-m>  1.24</z-m>
         </offsets>
     </model>
+
+    <light>
+    	<!-- This light only works in 2020.4.0 and with dynamic lights enabled -->
+	  <name>my-spotlight</name>
+	  <type>point</type>
+	  <position>
+	    <x-m>-8.78565</x-m>
+	    <y-m>-0.007164</y-m>
+	    <z-m>2.04776</z-m>
+	  </position>
+	  <ambient>
+	    <r>0.03</r>
+	    <g>0.03</g>
+	    <b>0.03</b>
+	    <a>1</a>
+	  </ambient>
+	  <diffuse>
+	    <r>0.95</r>
+	    <g>0.9</g>
+	    <b>0.9</b>
+	    <a>1</a>
+	  </diffuse>
+	  <specular>
+	    <r>0.0</r>
+	    <g>0.0</g>
+	    <b>0.0</b>
+	    <a>1</a>
+	  </specular>
+	  <attenuation>
+	    <c>1.0</c>
+	    <l>0.0</l>
+	    <q>0.075</q>
+	  </attenuation>
+	  <range-m>3</range-m>
+	  <dim-factor>
+	    <property>systems/electrical/outputs/cabin-dim</property>
+	  </dim-factor>
+	</light>
 </PropertyList>
