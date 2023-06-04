@@ -643,7 +643,7 @@ RadarScreenLeft = {
             me.heady = "      ";
         }
         if (contact.getLastClosureRate() != 0) {
-            me.clos = sprintf("CLO%+5dK",math.round(contact.getLastClosureRate()*0.1)*10);
+            me.clos = sprintf("CLO%+5dKT",math.round(contact.getLastClosureRate()*0.1)*10);
         } else {
             me.clos = "         ";
         }
@@ -671,7 +671,7 @@ RadarScreenLeft = {
             me.heady = "      ";
         }
         if (contact.getLastClosureRate() != 0) {
-            me.clos = sprintf("CLO%+5dK",math.round(contact.getLastClosureRate()*0.1)*10);
+            me.clos = sprintf("CLO%+5dKT",math.round(contact.getLastClosureRate()*0.1)*10);
         } else {
             me.clos = "         ";
         }
@@ -718,7 +718,7 @@ RadarScreenLeft = {
         me.iiii = 0;
         var callsign = "";
         if (me.prio != nil and me.prio.getCallsign() != nil) callsign = me.prio.getCallsign();
-        me.rangeInfo.setText(sprintf("  Range: %3d NM      %s", radar_system.apy1Radar.getRange(),callsign));
+        me.rangeInfo.setText(sprintf("  RANGE: %3d NM      %s", radar_system.apy1Radar.getRange(),callsign));
         me.randoo = rand();
         if (radar_system.datalink_power.getBoolValue()) {
             foreach(contact; vector_aicontacts_links) {
@@ -801,8 +801,11 @@ RadarScreenLeft = {
             me.interceptCross.setTranslation(me.echoPos);
             me.interceptCross.setVisible(1);
             var mag_offset = getprop("/orientation/heading-magnetic-deg") - getprop("/orientation/heading-deg");
-            me.txt = sprintf("Intercept: hdg %d magn. %.1f minutes", geo.normdeg(me.intercept[1]+mag_offset), me.intercept[0]/60);
+            me.txt = sprintf("INTERCEPT: HDG %d MAGN  %.1f MINUTES", geo.normdeg(me.intercept[1]+mag_offset), me.intercept[0]/60);
             me.interceptText.setText(me.txt);
+        } elsif (radar_system.apy1Radar.getPriorityTarget() != nil and radar_system.apy1Radar.currentMode.priorityTarget2 != nil) {
+            me.interceptText.setText("NO INTERCEPT POSSIBLE");
+            me.interceptCross.setVisible(0);
         } else {
             me.interceptText.setText("");
             me.interceptCross.setVisible(0);
@@ -1856,6 +1859,7 @@ var get_intercept = func(bearingToRunner, dist_m, runnerHeading, runnerSpeed, ch
     var b = 2 * vector.Math.dotProduct(VectorFromRunner, RunnerVelocity);
     var c = -dist_m * dist_m;
     var dd = b*b-4*a*c;
+    if (a == 0) a == 1000;# Otherwise same speeds will produce no intercept.
     if (dd<0 or a == 0) {
       # intercept not possible
       return nil;
