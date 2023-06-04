@@ -29,7 +29,7 @@ if you contacted me before making any changes to this software.
   <effect>
     <inherits-from>Effects/model-combined-deferred</inherits-from>
     <object-name>fuselage</object-name>
-    <object-name>fuselage.inner</object-name>
+    <!--object-name>fuselage.inner</object-name-->
     <object-name>fuselage.belly</object-name>
     <object-name>doorFL</object-name>
     <object-name>doorRL</object-name>
@@ -169,9 +169,9 @@ if you contacted me before making any changes to this software.
 
 	<animation>
 		<type>noshadow</type>
-    <object-name>fuselage.inner</object-name>
-    <object-name>fuselage.belly</object-name>
-    <object-name>cockpit</object-name>    
+	    <object-name>fuselage.inner</object-name>
+	    <object-name>fuselage.belly</object-name>
+	    <object-name>cockpit</object-name>    
 	</animation>
 
   <animation>
@@ -269,16 +269,16 @@ if you contacted me before making any changes to this software.
 		<object-name>radioRoom</object-name>
 		<condition>
 		  <or>
-      	<property>sim/multiplay/generic/float[6]</property>
-      	<property>sim/multiplay/generic/float[7]</property>
-      	<property>sim/multiplay/generic/float[15]</property>
-      	<property>sim/multiplay/generic/float[16]</property>
-      	<property>sim/multiplay/generic/int[19]</property>
-      	<equals>
-      		<property>/sim/current-view/view-number</property>
-      		<value>12</value>
-      	</equals>
-      </or>
+	      	<property>sim/multiplay/generic/float[6]</property>
+	      	<property>sim/multiplay/generic/float[7]</property>
+	      	<property>sim/multiplay/generic/float[15]</property>
+	      	<property>sim/multiplay/generic/float[16]</property>
+	      	<property>sim/multiplay/generic/int[19]</property>
+	      	<equals>
+	      		<property>/sim/current-view/view-number-raw</property>
+	      		<value>105</value>
+	      	</equals>
+      	  </or>
 		</condition>
 	</animation>
 
