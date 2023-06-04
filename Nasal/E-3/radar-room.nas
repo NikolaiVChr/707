@@ -811,6 +811,17 @@ RadarScreenLeft = {
             me.interceptCross.setVisible(0);
         }
 
+        if (radar_system.apy1Radar.getPriorityTarget() != nil) {
+            if (me.elapsed - radar_system.apy1Radar.getPriorityTarget().getLastBlepTime() > 15) {
+                radar_system.apy1Radar.currentMode.undesignate();
+            }
+        }
+        if (radar_system.apy1Radar.currentMode.priorityTarget2 != nil) {
+            if (me.elapsed - radar_system.apy1Radar.currentMode.priorityTarget2.getLastBlepTime() > 15) {
+                radar_system.apy1Radar.currentMode.undesignate();
+            }
+        }
+
         if (cursor_screen == 0 and me.desig_new == nil and cursor_type == 0) {
             radar_system.apy1Radar.undesignate();
         } elsif (me.desig_new != nil) {
