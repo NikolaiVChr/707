@@ -1,6 +1,6 @@
 AC3Db
 MATERIAL "radarframe" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0 0 0 spec 1 1 1 shi 50 trans 0
-MATERIAL "radarblade" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0 0 0 spec 1 1 1 shi 50 trans 0
+MATERIAL "radarblade" rgb 1 1 1 amb 1 1 1 emis 1 1 1 spec 0 0 0 shi 50 trans 0
 MATERIAL "radarcover" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0 0 0 spec 1 1 1 shi 50 trans 0
 MATERIAL "radar" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0 0 0 spec 1 1 1 shi 50 trans 0
 MATERIAL "digits" rgb 0.8 0.8 0.8 amb 1 1 1 emis 0 0 0 spec 1 1 1 shi 50 trans 0
