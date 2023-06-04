@@ -344,6 +344,11 @@ no. D6-3071-00
         <debug-stt type="int">0</debug-stt>
     </debug-radar>
 
+    <pbr>
+        <metal type="double">1</metal>
+        <rough type="double">1</rough>
+    </pbr>
+
     <rotors>
         <main>
             <blade n="3">

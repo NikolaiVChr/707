@@ -23,6 +23,46 @@ if you contacted me before making any changes to this software.
 <info (at) marc-kraus.de> April, 2017
 ########################################################################-->
 <PropertyList>
+  <key n="49">
+            <name>1</name>
+                <desc>Metal inc</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>setprop("pbr/metal",getprop("pbr/metal")+0.1);print("metal ", getprop("pbr/metal"));</script>
+                </binding>
+        </key>
+        <key n="50">
+            <name>2</name>
+                <desc>Metal dec</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>setprop("pbr/metal",getprop("pbr/metal")-0.1);print("metal ", getprop("pbr/metal"));</script>
+                </binding>
+        </key>
+        <key n="51">
+            <name>3</name>
+                <desc>Rough inc</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>setprop("pbr/rough",getprop("pbr/rough")+0.1);print("rough ", getprop("pbr/rough"));</script>
+                </binding>
+        </key>
+        <key n="52">
+            <name>4</name>
+                <desc>Rough dec</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>setprop("pbr/rough",getprop("pbr/rough")-0.1);print("rough ", getprop("pbr/rough"));</script>
+                </binding>
+        </key>
+        <key n="53">
+            <name>5</name>
+                <desc>Reload model</desc>
+                <binding>
+                    <command>nasal</command>
+                    <script>fgcommand("reinit", props.Node.new( {"subsystem": "aircraft-model"} ));</script>
+                </binding>
+        </key>
 <key n="127">
 	<name>Delete</name>
 	<desc>Toggle Reversers</desc>
