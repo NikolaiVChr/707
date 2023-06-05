@@ -70,7 +70,7 @@ if you contacted me before making any changes to this software.
    <vtailarm  unit="FT" >   68.82 </vtailarm>
 
 		<location name="AERORP" unit="IN">
-			<x>  0.00 </x>
+			<x>  35.00 </x>
 			<y>  0.00 </y>
 			<z>  0.00 </z>
 		</location>
@@ -255,11 +255,6 @@ if you contacted me before making any changes to this software.
  <propulsion>
 
    <engine file="rf33">
-    <location unit="IN">
-      <x>  22.11 </x>
-      <y>-586.50 </y>
-      <z> -46.00 </z>
-    </location>
     <orient unit="DEG">
       <pitch> 0.00 </pitch>
       <roll>   0.00 </roll>
@@ -281,11 +276,6 @@ if you contacted me before making any changes to this software.
   </engine>
 
    <engine file="rf33">
-    <location unit="IN">
-      <x>-164.20 </x>
-      <y>-393.62 </y>
-      <z> -77.00 </z>
-    </location>
     <orient unit="DEG">
       <pitch> 0.00 </pitch>
       <roll>   0.00 </roll>
@@ -307,11 +297,6 @@ if you contacted me before making any changes to this software.
   </engine>
 
    <engine file="rf33">
-    <location unit="IN">
-      <x>-164.20 </x>
-      <y> 393.62 </y>
-      <z> -77.00 </z>
-    </location>
     <orient unit="DEG">
       <pitch> 0.00 </pitch>
       <roll>   0.00 </roll>
@@ -333,11 +318,6 @@ if you contacted me before making any changes to this software.
   </engine>
 
    <engine file="rf33">
-    <location unit="IN">
-      <x>  22.11 </x>
-      <y> 586.50 </y>
-      <z> -46.00 </z>
-    </location>
     <orient unit="DEG">
       <pitch> 0.00 </pitch>
       <roll>   0.00 </roll>
