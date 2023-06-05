@@ -1105,7 +1105,7 @@ var APY1 = {
 	fieldOfRegardMaxElev: 15,
 	fieldOfRegardMinElev: 15,
 	isEnabled: func {
-		var working = 1;#getprop("instrumentation/radar/knob") and !getprop("/fdm/jsbsim/gear/unit[0]/WOW") and getprop("instrumentation/radar/serviceable");
+		var working = getprop("instrumentation/radar/knob") and !getprop("/fdm/jsbsim/gear/unit[0]/WOW") and getprop("instrumentation/radar/serviceable");
 		setprop("instrumentation/mptcas/on", working);
 		return working;
 	},
