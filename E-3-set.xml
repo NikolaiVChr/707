@@ -48,7 +48,8 @@ if you contacted me before making any changes to this software.
   <model n="0">
    	 <path>Aircraft/707/Models/E-3.xml</path>
       <livery>
-        <file type="string">EC-137</file>
+        <name type="string">Luxembourg NATO AWACS</name>
+        <file type="string">NATO-E3</file>
       </livery>
   </model>
 
