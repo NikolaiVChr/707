@@ -114,6 +114,8 @@ if you contacted me before making any changes to this software.
 		<object-name>doorRefuel</object-name>
 		<object-name>Radome</object-name>
 		<object-name>RadomeSup</object-name>
+		<object-name>lhdoorinner</object-name>
+		<object-name>rhdoorinner</object-name>
 	</effect>
   <!--effect>
     <inherits-from>Effects/model-combined-deferred</inherits-from>
@@ -260,7 +262,7 @@ if you contacted me before making any changes to this software.
 		<type>noshadow</type>
 	    <object-name>fuselage.inner</object-name>
 	    <object-name>fuselage.belly</object-name>
-	    <object-name>cockpit</object-name>    
+	    <!--object-name>cockpit</object-name-->    
 	</animation>
 
   <animation>
