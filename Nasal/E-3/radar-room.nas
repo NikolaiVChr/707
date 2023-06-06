@@ -1255,7 +1255,7 @@ RadarScreenMiddle = {
             .setText("")
             .setAlignment("center-center")
             .setTranslation(me.max_x*0.5,me.max_y*0.5)
-            .setFont("NotoMono-Regular.ttf");
+            ;#.setFont("NotoMono-Regular.ttf");
     },
 
     updateAttr: func {
