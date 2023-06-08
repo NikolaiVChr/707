@@ -51,7 +51,7 @@ var zIffFriendly           = 35;
 var zIffUnknown            = 36;
 var zCompas                = 50;
 
-
+var interceptTxt = "";
 
 var cursor_pos = [0,0];
 var cursor_time = 0;
@@ -802,13 +802,16 @@ RadarScreenLeft = {
             me.interceptCross.setVisible(1);
             var mag_offset = getprop("/orientation/heading-magnetic-deg") - getprop("/orientation/heading-deg");
             me.txt = sprintf("INTERCEPT: HDG %d MAGN  %.1f MINUTES", geo.normdeg(me.intercept[1]+mag_offset), me.intercept[0]/60);
+            interceptTxt = me.txt ~ sprintf("\n(The aircraft is bearing %d at %.1f NM out.)", me.bearingToRunner_deg, me.dist_m*M2NM);
             me.interceptText.setText(me.txt);
         } elsif (radar_system.apy1Radar.getPriorityTarget() != nil and radar_system.apy1Radar.currentMode.priorityTarget2 != nil) {
             me.interceptText.setText("NO INTERCEPT POSSIBLE");
             me.interceptCross.setVisible(0);
+            interceptTxt = "";
         } else {
             me.interceptText.setText("");
             me.interceptCross.setVisible(0);
+            interceptTxt = "";
         }
 
         if (radar_system.apy1Radar.getPriorityTarget() != nil) {
@@ -1260,8 +1263,13 @@ RadarScreenMiddle = {
 
     updateAttr: func {
         # every once in a while display attribution for 4 seconds.
-        me.attrText.setText(providers[zoom_provider[zoom_curr]].attribution);
-        me.attrText.setVisible(math.mod(int(me.input.timeElapsed.getValue()*0.25), 120) == 0)
+        if (math.mod(int(me.input.timeElapsed.getValue()*0.25), 120) == 0) {
+            me.attrText.setText(providers[zoom_provider[zoom_curr]].attribution);
+            me.attrText.setVisible(1);
+        } else {
+            me.attrText.setText(interceptTxt);
+            me.attrText.setVisible(interceptTxt != "");
+        }
     },
 
     zoomAdjust: func() {
