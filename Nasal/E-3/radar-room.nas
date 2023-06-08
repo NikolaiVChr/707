@@ -1263,7 +1263,7 @@ RadarScreenMiddle = {
 
     updateAttr: func {
         # every once in a while display attribution for 4 seconds.
-        if (math.mod(int(me.input.timeElapsed.getValue()*0.25), 120) == 0) {
+        if (math.mod(int(me.input.timeElapsed.getValue()*0.25), 120) == 0 and providers[zoom_provider[zoom_curr]].attribution != "") {
             me.attrText.setText(providers[zoom_provider[zoom_curr]].attribution);
             me.attrText.setVisible(1);
         } else {
