@@ -209,6 +209,7 @@ RadarScreenLeft = {
                 .setAlignment("left-center")
                 .setColor(rdrColorIntercept)
                 .set("z-index",zIntercept)
+                .hide()
                 .setFontSize(15, 1.0);
         rdr1.rangeInfo = rdr1.rootCenter.createChild("text")
                 .setTranslation(-diam*0.25*1.5, diam*0.35)
@@ -802,7 +803,7 @@ RadarScreenLeft = {
             me.interceptCross.setVisible(1);
             var mag_offset = getprop("/orientation/heading-magnetic-deg") - getprop("/orientation/heading-deg");
             me.txt = sprintf("INTERCEPT: HDG %d MAGN  %.1f MINUTES", geo.normdeg(me.intercept[1]+mag_offset), me.intercept[0]/60);
-            interceptTxt = me.txt ~ sprintf("\n(The aircraft is bearing %d at %.1f NM out.)", me.bearingToRunner_deg, me.dist_m*M2NM);
+            interceptTxt = sprintf("INTERCEPT: HDG %d MAGN\n%.1f MINUTES", geo.normdeg(me.intercept[1]+mag_offset), me.intercept[0]/60) ~ sprintf("\n^\nBearing %d\nAt %.1f NM out.", me.bearingToRunner_deg, me.dist_m*M2NM);
             me.interceptText.setText(me.txt);
         } elsif (radar_system.apy1Radar.getPriorityTarget() != nil and radar_system.apy1Radar.currentMode.priorityTarget2 != nil) {
             me.interceptText.setText("NO INTERCEPT POSSIBLE");
