@@ -26,14 +26,18 @@ if you contacted me before making any changes to this software.
  <path>windowIce.ac</path>
 
 	<effect>
-		<inherits-from>Effects/model-transparent</inherits-from>
+		<inherits-from>Effects/model-pbr-transparent</inherits-from>
+		<parameters>
+				<metallic-factor type="float">0</metallic-factor>
+	    	<roughness-factor type="float">0.1</roughness-factor>
+	  </parameters>
 		<object-name>windowIceCapt</object-name>
 		<object-name>windowIceCapt.FO</object-name>
 		<object-name>windowIceFO</object-name>
 		<object-name>windowIceFO.Capt</object-name>
   </effect>
   
-	<animation>
+	<!--animation>
 		<type>select</type>
 		<object-name>windowIceCapt</object-name>
 		<object-name>windowIceCapt.FO</object-name>
@@ -55,10 +59,10 @@ if you contacted me before making any changes to this software.
 				<value>0.9</value>
 			</less-than>
 		</condition>
-	</animation>
+	</animation-->
 	 
 	<!-- the ice effect -->
-	<animation>
+	<!--animation>
 		<type>blend</type>
 		<object-name>windowIceCapt</object-name>
 		<object-name>windowIceCapt.FO</object-name>
@@ -72,7 +76,7 @@ if you contacted me before making any changes to this software.
 		<object-name>windowIceFO.Capt</object-name>
 		<property>sim/multiplay/generic/float[10]</property>
 		<factor>1</factor>
-	</animation> 
+	</animation--> 
 	
 	<!-- go inside -->
 	<animation>

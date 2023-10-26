@@ -7,7 +7,7 @@ kids 4
 OBJECT poly
 name "windowIceCapt"
 loc 0.0000000 0.0000000 -0.0001010
-texture "windowIce.png"
+texture "../E-3/glass-albedo.png"
 texrep 1 1
 numvert 160
 -18.3053341 1.4662130 0.6849830
@@ -1039,7 +1039,7 @@ kids 0
 OBJECT poly
 name "windowIceCapt.FO"
 loc 0.0000000 0.0000000 -0.0001010
-texture "windowIce.png"
+texture "../E-3/glass-albedo.png"
 texrep 1 1
 numvert 46
 -18.3631592 1.2784880 -0.8116460
@@ -1345,7 +1345,7 @@ kids 0
 OBJECT poly
 name "windowIceFO"
 loc 0.0000000 0.0000000 0.0000000
-texture "windowIce.png"
+texture "../E-3/glass-albedo.png"
 texrep 1 1
 numvert 160
 -18.3053341 1.4662130 -0.6850840
@@ -2377,7 +2377,7 @@ kids 0
 OBJECT poly
 name "windowIceFO.Capt"
 loc 0.0000000 0.0000000 0.0000000
-texture "windowIce.png"
+texture "../E-3/glass-albedo.png"
 texrep 1 1
 numvert 46
 -18.3631592 1.2784880 0.8117470
