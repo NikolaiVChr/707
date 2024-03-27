@@ -4,7 +4,7 @@
     "path": "Nasal/E-3/vector.nas"
   },
   "radar-system": {
-    "version": "2.0.3",
+    "version": "2.0.4",
     "path": "Nasal/E-3/radar-system.nas"
   },
   "radar-system-database": {
@@ -16,7 +16,7 @@
     "path": "Nasal/E-3/damage.nas"
   },
   "iff": {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "path": "Nasal/E-3/iff.nas"
   },
   "datalink": {
